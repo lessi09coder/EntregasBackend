@@ -18,12 +18,12 @@ cartRouter.post('/', (req,res)=>{
 })
 
 cartRouter.post('/:cid/product/:pid', (req,res)=>{
-    let cartId = parseInt(req.params.cid)
-    let productId = parseInt(req.params.pid)
+    let cartId = parseInt(req.params.cid);
+    let productId = parseInt(req.params.pid);
 
-    const productById = mgProductos.getProductById(productId)
-    mgCart.addCart(productById, cartId)
-    res.send("proceso")
+    const productById = mgProductos.getProductById(productId);
+    mgCart.addCart(productById.id, cartId);
+    res.send("proceso");
 
 })
 

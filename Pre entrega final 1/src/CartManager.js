@@ -43,12 +43,42 @@ class CartManager {
         return idSend
     }
 
+    //addCart trae el id del producto y el id del carrito segun los params
     addCart( productById , cartId) {
         //let idd = this.cart.length
         let cart = JSON.parse(fs.readFileSync(this.path, 'utf-8'));
         console.log(productById)
+        console.log(cartId)
+        //console.log(cart[0].id)
+        if(cart == ""){
+            console.log("hola no hay carrito id")
+
+        }else {
+            console.log("hola 2")
+            //console.log(cart[cartId].id)            
+            let cartParse = cart[cartId];            
+            let findProductParse = cartParse.products.find(e => e.id == productById);
+            console.log(findProductParse)
+            if(findProductParse){        
+                let posIndex = cartParse.products.findIndex(e => e.id == productById)
+                cartParse.products[posIndex].qy += 1
+                fs.writeFileSync(this.path, JSON.stringify(cart))
+            }else {
+                let NewProductsCart = {                    
+                    id : productById,
+                    qy : 1,
+                }
+                cartParse.products.push(NewProductsCart)
+                //cart.push(cartParse)
+                fs.writeFileSync(this.path, JSON.stringify(cart))
+            }
+            console.log(cartParse)
+            //fs.writeFileSync(this.path, JSON.stringify(cartParse))
+        }
         
-        if (cart.find((e) => e.id == productById.id)) {            
+
+
+        /* if (cart.find((e) => e.id == productById.id)) {            
             return "EXISTE";
         } else {
             const newCart = {
@@ -61,7 +91,7 @@ class CartManager {
 
             cart.push(newCart)
             fs.writeFileSync(this.path, JSON.stringify(cart))
-        }
+        } */
 
     };
 }
