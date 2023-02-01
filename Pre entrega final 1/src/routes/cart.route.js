@@ -7,6 +7,14 @@ let mgProductos = new ProductManager();
 
 //ruta referencia http://localhost:8080/api/cart
 cartRouter.get('/:cId', (req, res) => {
+    const cId = parseInt(req.params.cId)
+    let cart = mgCart.getCartById(cId);  
+    
+    res.send(cart)
+})
+
+cartRouter.get('/', (req, res) => {
+    
     let cart = mgCart.getCart();  
     
     res.send(cart)

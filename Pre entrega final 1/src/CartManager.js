@@ -4,16 +4,16 @@ class CartManager {
     
     constructor() {
         this.cart = [];
-        this.path = './cart.JSON'
+        this.path = './carrito.json'
     }
 
     getCart() {
         //let productsList = this.products.slice(); 
-        return JSON.parse(fs.readFileSync('./cart.JSON', 'utf-8'));
+        return JSON.parse(fs.readFileSync(this.path, 'utf-8'));
     };
 
     getCartById(id) {
-        let listParse = JSON.parse(fs.readFileSync('./cart.JSON', 'utf-8'));
+        let listParse = JSON.parse(fs.readFileSync(this.path, 'utf-8'));
         let existID = listParse.find(e => e.id == id);
         if (existID) {
             return existID
@@ -75,24 +75,7 @@ class CartManager {
             console.log(cartParse)
             //fs.writeFileSync(this.path, JSON.stringify(cartParse))
         }
-        
-
-
-        /* if (cart.find((e) => e.id == productById.id)) {            
-            return "EXISTE";
-        } else {
-            const newCart = {
-                qy: 1,
-                product:productById.id,
-                //id: cart.length
-            }
-            
-            console.log(newCart)
-
-            cart.push(newCart)
-            fs.writeFileSync(this.path, JSON.stringify(cart))
-        } */
-
+     
     };
 }
 
