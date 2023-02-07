@@ -1,0 +1,18 @@
+<h1>Productos</h1>
+
+{{!-- Cada producto viene individualmente y se genera para cada uno lo siguiente:
+ --}}
+ {{#each todosProductos}}
+<div>
+    <h3>{{this.title}}</h3>
+    <p>{{this.description}}</p>
+    <p>Precio: ${{this.price}}</p>
+    <p>Stock: {{this.stock}} Pares de calzado </p>
+    <a href="/api/product/{{this.id}}">DETALLES</a>
+</div>
+{{/each}}
+
+{{!--
+<script src="/socket.io/socket.io.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/index.js"></script> --}}
