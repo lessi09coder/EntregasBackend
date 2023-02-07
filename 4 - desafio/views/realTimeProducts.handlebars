@@ -1,14 +1,19 @@
+<h1>Productos</h1>
 
+{{!-- Cada producto viene individualmente y se genera para cada uno lo siguiente:
+ --}}
+ 
 
-<form id="formProduct">
-        <h2>Add product:</h2>
+<form id="formAddProduct">
+        <h2>Agregar un producto</h2>
         <input type="text" placeholder="Title" name="title" id="title" required />
         <input type="text" placeholder="Descripcion" name="description" id="description" required maxlength="80" />
         <input type="text" placeholder="Url image" name="img" id="img" required />
         <input type="number" placeholder="Price" name="price" id="price" required />
-        <button class="button-submit" type="submit">Submit</button>
+        <button type="submit">Agregar</button>
 </form>
-
+<div id="realTimeCont"></div>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/index.js"></script>
+

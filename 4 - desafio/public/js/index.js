@@ -1,7 +1,63 @@
 const socket = io();
-const productsContainer = document.getElementById('')
-const form = document.getElementById("");
-let products = []
+const productsContainer = document.getElementById('realTimeCont')
+const form = document.getElementById("formAddProduct");
+let productos = [];
+
+socket.on('todosLosProductosClientes', (todosProductos) => {
+    console.log(todosProductos)
+    productos = todosProductos;
+    agregarProducto();
+})
+
+const agregarProducto = () => {
+    const boxsProducto = productos.map(product => {
+        const box = document.createElement('div')
+
+        box.innerHTML =
+                        `                        
+                        <h3>${product.title}</h3>
+                        <p>${product.description}</p>
+                        <p>Precio: $ ${product.price}</p>
+                        <p>Stock: ${product.stock} Pares de calzado </p>
+                        `
+        return box
+    })
+    productsContainer.innerHTML = '';
+    for (const box of boxsProducto) {
+        productsContainer.appendChild(box);
+    }
+}
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    entregaForm();
+});
+const entregaForm = () => {
+    const title = document.getElementById("title").value;
+    const description = document.getElementById("description").value;
+    const price = document.getElementById("price").value;
+    const img = document.getElementById("img").value;
+
+    fetch("http://localhost:8080/api/products", {
+        method: "post", 
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            title: title,
+            description: description,
+            price: price,
+            thumbnails: img,
+        }),
+    });
+    //form.reset();
+};
+
+
+
+
 /* const express = require('express');
 const handlebars = require('express-handlebars');
 const {Server} = require('socket.io');

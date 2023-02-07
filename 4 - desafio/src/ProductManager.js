@@ -17,18 +17,16 @@ class ProductManager {
     addProduct(oneAddProduct) {
         //let idd = this.products.length
         let products = JSON.parse(fs.readFileSync(this.path, 'utf-8'));
-        console.log(oneAddProduct)
+        //console.log(oneAddProduct)
 
         if (products.find((e) => e.code == oneAddProduct.code)) {            
             return "EXISTE";
-        } else if (oneAddProduct.title && oneAddProduct.description && oneAddProduct.code && oneAddProduct.price && oneAddProduct.stock && oneAddProduct.status) {
+        } else if (oneAddProduct.title && oneAddProduct.description &&  oneAddProduct.price ) {
             const newProduct = {
                 title: oneAddProduct.title,
                 description: oneAddProduct.description,
                 price: oneAddProduct.price,
-                thumbnail: oneAddProduct.thumbnail,
-                code: oneAddProduct.code,
-                stock: oneAddProduct.stock,
+                thumbnail: oneAddProduct.thumbnail,   
                 status: true,
                 id:this.incrementalId(),
                 //id: products.length
