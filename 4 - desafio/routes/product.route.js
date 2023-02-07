@@ -1,4 +1,4 @@
-const { Router } = require('express');
+/* const { Router } = require('express');
 
 const productRouter = Router();
 
@@ -14,4 +14,4 @@ productRouter.get('/:pId', (req, res) => {
     res.render('realTimeProducts', { uno , title: "RealTimeProducts" })
 })
 
-module.exports = productRouter;
+module.exports = productRouter; */

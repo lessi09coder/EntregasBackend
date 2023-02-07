@@ -32,13 +32,13 @@ form.addEventListener("submit", (event) => {
     event.preventDefault();
     entregaForm();
 });
-const entregaForm = () => {
+const entregaForm = async () => {
     const title = document.getElementById("title").value;
     const description = document.getElementById("description").value;
     const price = document.getElementById("price").value;
     const img = document.getElementById("img").value;
-
-    fetch("http://localhost:8080/api/products", {
+      
+    await fetch("http://localhost:8080/api/products", {
         method: "post", 
         mode: "cors",
         cache: "no-cache",
@@ -51,7 +51,7 @@ const entregaForm = () => {
             price: price,
             thumbnails: img,
         }),
-    });
+    });   
     //form.reset();
 };
 

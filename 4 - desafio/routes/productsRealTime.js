@@ -13,11 +13,12 @@ const productsRealTime = Router();
 
 productsRealTime.get('/', (req,res)=>{
   //console.log(todo)
-  res.render('realtimeProducts' , { title: "real"})
+  res.render('realtimeProducts' , { title: "Productos en tiempo Real"})
 })
 productsRealTime.post("/", (req, res) => {
+  console.log(req.body);
   require('../src/app').emitProducs(req.body);
-  console.log(req.body)  
+  
   res.end();
 });
 

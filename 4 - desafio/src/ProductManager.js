@@ -17,7 +17,7 @@ class ProductManager {
     addProduct(oneAddProduct) {
         //let idd = this.products.length
         let products = JSON.parse(fs.readFileSync(this.path, 'utf-8'));
-        //console.log(oneAddProduct)
+        console.log(oneAddProduct)
 
         if (products.find((e) => e.code == oneAddProduct.code)) {            
             return "EXISTE";

@@ -52,8 +52,8 @@ io.on('connection', socket => {
 //console.log(todotodo)
 module.exports = {    
     httpServer,
-    emitProducs: async (pro)=>{
-        await mgProducts.addProduct(pro)
+    emitProducs: (pro)=>{
+        mgProducts.addProduct(pro)
     }
     
 }
