@@ -1,5 +1,5 @@
 import express from "express";
-import userRouter from "./src/routes/user.js";
+import productRouter from "./src/routes/products.js";
 import handlebars from 'express-handlebars'
 const app = express();
 
@@ -10,7 +10,7 @@ app.set('view engine' , 'handlebars')
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use('/user', userRouter);
+app.use('/products', productRouter); 
 
 const PORT = process.env.PORT || 8080 ;
 const server = app.listen(PORT , ()=>{

@@ -1,8 +1,8 @@
-import { getUsersService, createUserService } from "../services/userService.js";
+import { getProductService, createProductService } from "../services/productsService.js";
 
 
-const getUsers = async (req, res) => {
-    let users = await getUsersService()
+const getProducts = async (req, res) => {
+    let products = await getProductService()
     //console.log(users)
     /* let usersMapped = users.map(user=> {
         let newUser = {}
@@ -13,13 +13,13 @@ const getUsers = async (req, res) => {
     //res.render('user', { users })
     
     //console.log(users)
-    res.send(users)
+    res.send(products)
 };
     
-const createUser= (req, res) => {
-    let response = createUserService(req.body)
+const createProduct= (req, res) => {
+    let response = createProductService(req.body)
     res.send(response)
 };
 
 
-export { getUsers , createUser}
+export { getProducts , createProduct}
