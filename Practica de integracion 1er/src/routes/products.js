@@ -7,5 +7,4 @@ productRouter.get('/', getProducts);
 
 productRouter.post('/', createProduct);
 
-
 export default productRouter;

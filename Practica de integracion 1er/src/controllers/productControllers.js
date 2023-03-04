@@ -12,8 +12,8 @@ const getProducts = async (req, res) => {
     //console.log(usersMapped)
     //res.render('user', { users })
     
-    //console.log(users)
-    res.send(products)
+    console.log(products)
+    res.render('productsHome' ,{title: "Productos", products})
 };
     
 const createProduct= (req, res) => {

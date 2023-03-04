@@ -16,8 +16,10 @@ class ProductsMongoDb {
 
     async getProducts(){
         try {
-            let products = await this.productsCollection.find()
-            console.log(products)
+            let products = await this.productsCollection.find().lean()
+            //.lean() es para usar HBS o tambien podemos instalar las dependencias de dev "npm i -D handlebars@versionQueSea"
+            
+            //console.log(products)
             return products
         } catch (error){
             console.log(error)
