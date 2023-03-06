@@ -1,0 +1,51 @@
+[
+
+{"title":"Rayo",
+"description":"Zapatilla Deportiva",
+"price":12000,
+"thumbnail":"https://www.shutterstock.com/image-photo/man-tying-jogging-shoes-600w-381415150.jpg",
+"stock":10,
+"category": "calzado",
+"status": true
+},
+
+{"title":"Red",
+"description":"Zapato rojo",
+"price":8000,
+"thumbnail":"https://www.shutterstock.com/image-photo/closeup-red-sneakers-on-bright-600w-1796287516.jpg",
+"stock":6,
+"category": "calzado",
+"status": true},
+
+{"title":"Blue",
+"description":"Zapato azul",
+"price":9000,
+"thumbnail":"soy una miniatura",
+"stock":10,
+"category": "calzado",
+"status": true},
+
+{"title":"Yellow",
+"description":"Zapato amarillo ",
+"price":9500,
+"thumbnail":"soy una miniatura",
+"stock":12,
+"category": "calzado",
+"status": true},
+
+{"title":"Black",
+"description":"Zapato negro",
+"price":11000,
+"thumbnail":"soy una miniatura",
+"stock":13,
+"category": "calzado",
+"status": true},
+
+{"title":"Save",
+"description":"Zapato ecologico",
+"price":12000,
+"thumbnail":"soy una miniatura",
+"stock":20,
+"category": "calzado",
+"status": true}
+]
