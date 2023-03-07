@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 const productSchema = mongoose.Schema({
     title: {type: String, require: [true, "El campo description es requerido"] },
@@ -9,5 +10,6 @@ const productSchema = mongoose.Schema({
     category: { type: String, required: [true, "El campo category es requerido"] },
     thumbnail: { type: String, required: [true, "El campo thambail es requerido"] },
 });
+productSchema.plugin(mongoosePaginate)
 
 export default productSchema;

@@ -1,11 +1,11 @@
-{{#each products}}
 
-<ul>
-    <li>Nombre: {{this.title}} </li>  
-    <li>Descripcion: {{this.description}} </li>
-    <li>Precio: ${{this.price}} </li>
-    <li>Quedan: {{this.stock}} pares</li>
-    <li>Categoria: {{this.category}} </li>
-</ul>
+{{#each products.docs }}
+    <h2>Producto:</h2>
+    {{#each this}}
+       <h3>{{title}}</h3>
+       <h4>{{description}}</h4>
+       <h4>{{price}}</h4>
+       <h4>{{stock}}</h4>
+    {{/each}}
 
 {{/each}}

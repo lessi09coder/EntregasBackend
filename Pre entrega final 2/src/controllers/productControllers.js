@@ -3,7 +3,7 @@ import { getProductService, createProductService, getProductByIdService } from "
 
 const getProducts = async (req, res) => {
     let products = await getProductService()   
-    //console.log(products)
+    console.log(products)
     res.render('productsHome' ,{title: "Productos", products})
 };
     

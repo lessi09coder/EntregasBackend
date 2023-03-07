@@ -16,8 +16,10 @@ class ProductsMongoDb {
 
     async getProducts() {
         try {
-            let products = await this.productsCollection.find().lean()
-            //.lean() es para usar HBS o tambien podemos instalar las dependencias de dev "npm i -D handlebars@versionQueSea"
+            //let products = await this.productsCollection.find().lean()
+            let pro = this.productsCollection
+            let products = await pro.paginate( {category: "calzado"} , { limit: 5, page: 1 })
+            //console.log(products)
             return products
         } catch (error) {
             console.log(error)
@@ -36,10 +38,10 @@ class ProductsMongoDb {
     }
 
     async getProductById(id) {
-        try{
+        try {
             const product = await this.productsCollection.findOne({ _id: id }).lean()
             console.log(product)
-            if(!product){
+            if (!product) {
                 return `no existe el producto con el id ${id}`
             }
             return product
