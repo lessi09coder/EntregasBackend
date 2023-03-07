@@ -14,11 +14,11 @@ class ProductsMongoDb {
         this.productsCollection = mongoose.model(collection, schema);
     }
 
-    async getProducts() {
+    async getProducts(limit , page, ) {
         try {
             //let products = await this.productsCollection.find().lean()
             let pro = this.productsCollection
-            let products = await pro.paginate( {category: "calzado"} , { limit: 5, page: 1 })
+            let products = await pro.paginate( {} , { limit: limit, page: page , lean:true})
             //console.log(products)
             return products
         } catch (error) {

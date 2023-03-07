@@ -6,8 +6,8 @@ import productSchema from "../db/models/products.model.js"
 //en la clase ContendedorMongoDb tenemos la colleccion y al lado el esquema indicado
 const productDAO = new ProductsMongoDb('products', productSchema)
 
-const getProductService = async () => {
-    let product = await productDAO.getProducts()
+const getProductService = async (limit , page ) => {
+    let product = await productDAO.getProducts(limit , page )
     //console.log(users)
     return product
 }

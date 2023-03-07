@@ -4,7 +4,7 @@ import cartsRouter from "./routes/cartsRouter.js"
 import handlebars from 'express-handlebars'
 const app = express();
 
- app.engine('handlebars', handlebars.engine());
+app.engine('handlebars', handlebars.engine());
 app.set('views', './views')
 app.set('view engine' , 'handlebars')
 

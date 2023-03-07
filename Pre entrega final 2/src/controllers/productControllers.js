@@ -2,9 +2,12 @@ import { getProductService, createProductService, getProductByIdService } from "
 
 
 const getProducts = async (req, res) => {
-    let products = await getProductService()   
+    const limit = req.query.limit || 3;
+    const page = req.query.page || 1;    
+    let products = await getProductService(limit, page);
+    
     console.log(products)
-    res.render('productsHome' ,{title: "Productos", products})
+    res.render('productsHBS' ,{title: "Productos", products})
 };
     
 const addProduct= (req, res) => {
@@ -15,7 +18,7 @@ const addProduct= (req, res) => {
 const getProdudtById = async (req , res) => {
     const id = req.params.pid
     let productoId = await getProductByIdService(id)
-    res.render('productDetail' , {title: "Producto por ID", productoId})
+    res.render('productIDHBS' , {title: "Producto por ID", productoId})
 }
 
 export { getProducts , addProduct , getProdudtById}
