@@ -14,12 +14,24 @@ class ProductsMongoDb {
         this.productsCollection = mongoose.model(collection, schema);
     }
 
-    async getProducts(limit , page, ) {
+    async getProducts(limit , page  ) {
         try {
-            //let products = await this.productsCollection.find().lean()
-            let pro = this.productsCollection
-            let products = await pro.paginate( {} , { limit: limit, page: page , lean:true})
-            //console.log(products)
+                    
+            let products = await this.productsCollection.paginate( {} , { limit: limit, page: page , lean:true})            
+                products.prevLink = products.hasPrevPage?`http://localhost:8080/api/products?page=${products.prevPage}`:'';         
+                products.nextLink = products.hasNextPage?`http://localhost:8080/api/products?page=${products.nextPage}`:'';
+            
+            //products.isValid= !(page<=0||page>products.totalPages)
+ 
+            /* const data = {
+                productos : products.docs, 
+                hasPrevPage: products.hasPrevPage,
+                prevPage : products.prevPage,
+                hasNextPage: products.hasNextPage,
+                nextPage: products.nextPage
+            }
+            console.log(data) */
+            
             return products
         } catch (error) {
             console.log(error)

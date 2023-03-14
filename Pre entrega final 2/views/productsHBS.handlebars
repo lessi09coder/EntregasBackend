@@ -10,3 +10,19 @@
     
 
 {{/each}}
+
+<div>
+    {{#if products.hasPrevPage}}
+        <a href={{products.prevLink}}>  Anterior</a>
+    {{/if}}
+    
+     {{#if products.hasNextPage}}
+        <a href={{products.nextLink}}>Siguiente </a>
+    {{/if}} 
+
+    &nbsp;
+    <p>pagina actual: {{products.page}}</p>
+    &nbsp;
+</div>
+ 
+

@@ -21,4 +21,4 @@ const getProductByIdService = async (id) => {
     let resp = productDAO.getProductById(id)
     return resp
 }
-export { getProductService, createProductService, getProductByIdService };  
+export { getProductService, createProductService, getProductByIdService };

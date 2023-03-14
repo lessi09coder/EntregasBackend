@@ -3,7 +3,8 @@ import { getProductService, createProductService, getProductByIdService } from "
 
 const getProducts = async (req, res) => {
     const limit = req.query.limit || 3;
-    const page = req.query.page || 1;    
+    const page = req.query.page || 1;   
+    
     let products = await getProductService(limit, page);
     
     console.log(products)
