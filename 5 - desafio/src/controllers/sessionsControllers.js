@@ -1,5 +1,5 @@
 const getSessionLogin = (req, res) => {
-    //Si al conectarse la sesión ya existe, entonces aumentar el contador
+  /*   //Si al conectarse la sesión ya existe, entonces aumentar el contador
     if (req.session.counter) {
         req.session.counter++;
         res.send(`Se ha visitado el sitio ${req.session.counter} veces.`)
@@ -9,7 +9,18 @@ const getSessionLogin = (req, res) => {
         req.session.counter = 1;
         res.send("Bienvenido!!!")
     } 
-    
+     */
+
+    const {username, password } = req.body;
+    if(username !== "alexis" || password !== "test123") {
+        return res.send('login failed')
+        ///console.log("login failed")
+    }
+    req.session.user = username;
+    req.session.admin = true;
+    res.send('login success')
+
+
 }
 
 

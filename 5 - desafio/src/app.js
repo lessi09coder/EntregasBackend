@@ -20,7 +20,7 @@ app.use(session({
 app.use('/api/setCookie', cookiesRouter);
 app.use('/api/session', sesionsRouter  );
 
-app.get('/api/session/login'), (req, res) => {
+/* app.get('/api/session/login'), (req, res) => {
     const {username, password } = req.body;
     if(username !== "alexis" || password !== "test123") {
         return res.send('login failed')
@@ -28,7 +28,7 @@ app.get('/api/session/login'), (req, res) => {
     req.session.user = username;
     req.session.admin = true;
     res.send('login success')
-}
+} */
 
 const PORT = process.env.PORT || 8080;
 

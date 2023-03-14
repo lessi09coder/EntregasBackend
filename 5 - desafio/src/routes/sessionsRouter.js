@@ -5,7 +5,7 @@ import { getSessionLogout, getSessionLogin } from "../controllers/sessionsContro
 const sesionsRouter = Router();
 
 
-sesionsRouter.get('/user', getSessionLogin)
+sesionsRouter.post('/user', getSessionLogin)
 sesionsRouter.get('/logout', getSessionLogout )
 
 
