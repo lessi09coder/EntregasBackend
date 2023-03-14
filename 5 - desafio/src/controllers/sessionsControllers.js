@@ -31,6 +31,16 @@ const getSessionLogout = (req, res) => {
     })
 }
 
+const getPrivate = (req, res) => {
+    res.send('sos admin')
+}
 
+const auth = (req, res , next )=> {
+    if(req.session.admin){
+        next()
+    } else {
+        res.send('no sos admin')
+    }
+}
 
-export { getSessionLogout, getSessionLogin }
+export { getSessionLogout, getSessionLogin, auth , getPrivate}
