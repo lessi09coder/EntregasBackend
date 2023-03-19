@@ -4,7 +4,7 @@ import { getSessionLogout, getSessionLogin , auth, getPrivate } from "../control
 
 const sesionsRouter = Router();
 
-
+//si usamos el sessionsRouter.use(auth), todos los endpoints pediran que tengamos autorizacion
 sesionsRouter.post('/user', getSessionLogin)
 sesionsRouter.get('/logout', getSessionLogout )
 sesionsRouter.get('/admin', auth, getPrivate)

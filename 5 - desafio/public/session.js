@@ -34,7 +34,7 @@ function getUser() {
       body: JSON.stringify({ username: user, password: pass })
     })
       .then(response => response.text())
-      .then(responseText => console.log(responseText))
+     .then(responseText => console.log(responseText))      
       .catch(error => console.error(error));
 }
   

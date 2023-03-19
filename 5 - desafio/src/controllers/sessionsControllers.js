@@ -35,6 +35,7 @@ const getPrivate = (req, res) => {
     res.send('sos admin')
 }
 
+//este auth pasarlo a la carpeta middlewares
 const auth = (req, res , next )=> {
     if(req.session.admin){
         next()
