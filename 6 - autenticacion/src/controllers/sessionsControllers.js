@@ -6,6 +6,7 @@ const getUserLogin = (req, res) => {
 
     res.render('register',{})
 
+    
 
     //esto no, tiene que usar passport!!
     /* const {username, password } = req.body;
@@ -20,10 +21,12 @@ const getUserLogin = (req, res) => {
  */
 }
 
-const getUserRegister = (req, res) => {
+const getUserRegister = async (req, res) => {
     const {user, password } = req.body;
     console.log(req.body);
     console.log(user, password )
+    newUser = req.body;
+    await createUserService(newUser)
     //res.render('register',{})
     //res.send('aca te registras!')
 }

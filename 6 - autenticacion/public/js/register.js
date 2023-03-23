@@ -10,8 +10,8 @@ const addUserForm = async () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user: Valueuser, password: Valuepassword })
     })
-    //.then(response => response.text())
-    //.then(responseText => console.log(responseText))      
+    .then(response => response.text())
+    .then(responseText => console.log(responseText))      
     .catch(error => console.error(error));
 }
 

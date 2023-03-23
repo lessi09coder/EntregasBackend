@@ -3,7 +3,7 @@ const userSchema = require('../db/model/userModel.js')
 const userDAO = new UserMongoDbDAO('users', userSchema)
 
 const createUserService = async (user) => {    
-    const newUs = await userDAO.createUser(user)
+    const newUs = await userDAO.createNewUser(user)
     return newUs
 }
 const getUserByUsernameService = async (username) => {

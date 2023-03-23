@@ -14,7 +14,7 @@ class UserMongoDbDAO {
         const user = await this.userCollection.findOne({ username: username }).lean();
         return user;
     }
-    async createUser(user) {
+    async createNewUser(user) {
         const newUser = await this.userCollection.create({
             ...user            
         });
