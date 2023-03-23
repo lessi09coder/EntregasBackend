@@ -8,7 +8,8 @@ const {
 
 //si usamos el sessionsRouter.use(auth), todos los endpoints pediran que tengamos autorizacion
 sesionsRouter.post('/user', getUserLogin)
-sesionsRouter.get('/register', getUserRegister) //localhost:8080/api/session/register
+sesionsRouter.get('/register',getUserLogin )
+sesionsRouter.post('/register', getUserRegister) //localhost:8080/api/session/register
 sesionsRouter.get('/logout', getSessionLogout)
 sesionsRouter.get('/admin', auth, getPrivate)
 module.exports = sesionsRouter;

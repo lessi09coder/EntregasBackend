@@ -2,9 +2,9 @@ const { createUserService, getUserByUsernameService, loginUserService } = requir
 
 const getUserLogin = (req, res) => {
 
-    res.render("login",)
+    //res.render("login",)
 
-
+    res.render('register',{})
 
 
     //esto no, tiene que usar passport!!
@@ -21,8 +21,9 @@ const getUserLogin = (req, res) => {
 }
 
 const getUserRegister = (req, res) => {
-    const {username, password } = req.body;
-    console.log(req.body)
+    const {user, password } = req.body;
+    console.log(req.body);
+    console.log(user, password )
     //res.render('register',{})
     //res.send('aca te registras!')
 }
