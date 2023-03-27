@@ -10,10 +10,7 @@ class UserMongoDbDAO {
     constructor(collection, schema) {
         this.userCollection = mongoose.model(collection, schema);
     }
-    async getUserByUsername(username) {
-        const user = await this.userCollection.findOne({ username: username }).lean();
-        return user;
-    }
+    
     async createNewUser(user) {
         const newUser = await this.userCollection.create({
             ...user            
@@ -21,8 +18,9 @@ class UserMongoDbDAO {
         return newUser;
     }
     async findUser(user) {
-        let existUser = await this.userCollection.findOne({ username: user.username });
-        if (!existUser) return { Error: "Usuario inexistente" };
+        let existUser = await this.userCollection.findOne({ user: user.username });
+        //console.log(existUser)
+        if (!existUser) return { Error: "No existe usuario!" };
         return existUser;
     }
 }

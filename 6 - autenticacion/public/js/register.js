@@ -3,7 +3,7 @@ const addUserForm = async () => {
     const Valueuser = document.getElementById("email-User").value;
     const Valuepassword = document.getElementById("password-User").value;
     console.log(Valueuser , Valuepassword)
-    await fetch("http://localhost:8080/api/session/register",{
+    await fetch("/api/session/register",{
         method: "post",
         mode: "cors",
         cache: "no-cache",
@@ -11,8 +11,8 @@ const addUserForm = async () => {
         body: JSON.stringify({ user: Valueuser, password: Valuepassword })
     })
     .then(response => response.text())
-    .then(responseText => console.log(responseText))      
-    .catch(error => console.error(error));
+    .then(responseText => console.log(responseText))
+    .catch(error => console.error(error))
 }
 
 document.getElementById("formRegister").addEventListener("submit", (event) => {

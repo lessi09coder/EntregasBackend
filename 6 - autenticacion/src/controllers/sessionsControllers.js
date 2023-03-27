@@ -1,54 +1,96 @@
-const { createUserService, getUserByUsernameService, loginUserService } = require('../services/userServices.js')
+const { createUserService, loginUserService } = require('../services/userServices.js')
 
-const getUserLogin = (req, res) => {
+const getUser = async (req, res) => {
 
-    //res.render("login",)
+    res.render("login",{})
+   /* 
+    console.log("la session que llega:")
+    console.log(req.session)
+    
+    res.render("loginAccess", {})
+    */
+   
+    
+}
 
-    res.render('register',{})
 
+const postUserLogin = async (req, res) => {
+
+
+    try{
+        const username = (req.body)
+        //console.log(`el body trae ${username.username}`)
+         const loginUser = await loginUserService(username)
+         console.log(loginUser)
+
+         req.session.user = loginUser.user;
+         req.session.rol = loginUser.rol;
+        
+
+     
+         console.log("la session:")
+         console.log(req.session)
+         const seeee = req.session
+         return seeee
+
+    }catch {
+        res.status(500).send("hubo un error")
+    }
     
 
-    //esto no, tiene que usar passport!!
-    /* const {username, password } = req.body;
-    if(username !== "alexis" || password !== "test123") {
-        return res.send('login failed')
-        ///console.log("login failed")
-    }
-    req.session.user = username;
-    req.session.admin = true;
-    res.send('login success')
+    //console.log(` el user devuelto es ${loginUser} `) //anda bien
+    
 
- */
+    //req.session = { user: loginUser.user, rol: loginUser.rol };
+    /*  */
+    
+}
+
+const test = ((req, res) => {
+    
+    console.log("la session que llega:")
+    console.log(req.session)
+    
+    
+    res.render("loginAccess", {})
+    
+})
+
+const getRegister = (req, res) => {
+    res.render("register", {})
 }
 
 const getUserRegister = async (req, res) => {
-    const {user, password } = req.body;
+    const { user, password } = req.body;
     console.log(req.body);
-    console.log(user, password )
+    console.log(user, password)
+
     newUser = req.body;
+    //newUser = {user: "hola", password:11}
+
     await createUserService(newUser)
     //res.render('register',{})
     //res.send('aca te registras!')
 }
 
-const getSessionLogout = (req, res) => {
+/* const getSessionLogout = async (req, res) => {
     req.session.destroy(err => {
         if (!err) res.send('Logout ok!')
         else res.send({ status: 'Logout ERROR', body: err })
     })
-}
+} */
 
 const getPrivate = (req, res) => {
     res.send('sos admin')
 }
 
 //este auth pasarlo a la carpeta middlewares
-const auth = (req, res , next )=> {
-    if(req.session.admin){
+const auth = (req, res, next) => {
+    if (req.session.admin) {
         next()
     } else {
         res.send('no sos admin')
     }
 }
 
-module.exports =  { getSessionLogout, getUserLogin, getUserRegister, auth , getPrivate}
+module.exports = { postUserLogin, getRegister, getUser, getUserRegister, auth, getPrivate, test }
