@@ -30,8 +30,8 @@ const postUserLogin = async (req, res) => {
      
          console.log("la session:")
          console.log(req.session)
-         const seeee = req.session
-         return seeee
+         
+         res.send("todo ok")
 
     }catch {
         res.status(500).send("hubo un error")

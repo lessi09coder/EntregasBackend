@@ -15,11 +15,11 @@ const app = express();
 const mongoStore = MongoStore.create({
     mongoUrl: 'mongodb+srv://lessin09:test123@backend.5bixtxm.mongodb.net/?retryWrites=true&w=majority',
     mongoOptions: { useUnifiedTopology: true},
-    ttl:50
+    ttl:500
 });
 
 app.use(session({
-    //store: mongoStore,
+    store: mongoStore,
     secret: 'secreto123',
     resave: false, 
     saveUninitialized: false
