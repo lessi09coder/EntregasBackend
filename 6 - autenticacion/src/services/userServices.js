@@ -12,4 +12,9 @@ const loginUserService = async (user) => {
     return userMongoDb;
 };
 
-module.exports = { createUserService, loginUserService }
+const getUserByIdService = async (id) => {
+    const idUserMongoDb = await userDAO.findIdUser(id);
+    return idUserMongoDb
+}
+
+module.exports = { createUserService, loginUserService, getUserByIdService }

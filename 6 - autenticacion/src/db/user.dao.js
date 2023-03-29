@@ -23,6 +23,13 @@ class UserMongoDbDAO {
         if (!existUser) return { Error: "No existe usuario!" };
         return existUser;
     }
+
+    async findIdUser(id) {
+        let existIdUser = await this.userCollection.findOne({ _id: id });
+        //console.log(existIdUser)
+        if (!existIdUser) return { Error: "No existe id!" };
+        return existIdUser;
+    }
 }
 
 module.exports = UserMongoDbDAO;

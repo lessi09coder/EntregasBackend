@@ -4,6 +4,8 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo');
 //const cookieParser = require("cookie-parser");
 const handlebars = require('express-handlebars');
+const initPassport = require('./config/passport.js')
+const passport = require('passport')
 //const authRouter = require('./src/routes/auth');
 
 const sesionsRouter = require('./routes/sessionsRouter.js')
@@ -13,7 +15,7 @@ const app = express();
 
 
 const mongoStore = MongoStore.create({
-    mongoUrl: 'mongodb+srv://lessin09:test123@backend.5bixtxm.mongodb.net/?retryWrites=true&w=majority',
+    mongoUrl: 'mongodb+srv://lessin09:test123@backend.5bixtxm.mongodb.net/sessionsBase?retryWrites=true&w=majority',
     mongoOptions: { useUnifiedTopology: true},
     ttl:500
 });
@@ -35,10 +37,13 @@ app.use('/recursos', express.static(__dirname + '/public'));
 
 //app.use(cookieParser("secretoelcode"))
 
+initPassport();
+app.use(passport.initialize());
+
 app.use('/api/session', sesionsRouter); //localhost:8080/api/session
 
 app.use('/', (req, res) => {    
-    req.session.user = "hola"
+    req.session.user = null
     res.redirect("api/session/user")
 }); 
 

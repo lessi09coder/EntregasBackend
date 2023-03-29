@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-//const { createHash } = require("./");
+const { createHash } = require("../../utils/hashPass.js");
 
 const userSchema = mongoose.Schema({
     user: { type: String, unique: true, required: true },
@@ -11,7 +11,7 @@ const userSchema = mongoose.Schema({
 });
 
 //luego usar Hash en password
-/* 
+
 userSchema.pre("save", function (next) {
     const user = this;
     console.log(this)
@@ -21,5 +21,5 @@ userSchema.pre("save", function (next) {
     }
     user.password = createHash(this.password);
     next();
-}); */
+}); 
 module.exports = userSchema

@@ -1,16 +1,9 @@
 const { createUserService, loginUserService } = require('../services/userServices.js')
-
+const {yesValidPass} = require('../utils/hashPass.js')
 const getUser = async (req, res) => {
 
     res.render("login",{})
-   /* 
-    console.log("la session que llega:")
-    console.log(req.session)
-    
-    res.render("loginAccess", {})
-    */
-   
-    
+  
 }
 
 
@@ -18,22 +11,23 @@ const postUserLogin = async (req, res) => {
 
 
     try{
-        const username = (req.body)
-        //console.log(`el body trae ${username.username}`)
-         const loginUser = await loginUserService(username)
-         console.log(loginUser)
+        const username = (req.body)        
+        const loginUser = await loginUserService(username)
+        console.log(`el pass del body es ${req.body.password}`)
+        const validatePass = yesValidPass(loginUser , req.body.password)
+        console.log(loginUser)
+        if(validatePass) {
+            req.session.user = loginUser.user;
+            req.session.rol = loginUser.rol;
 
-         req.session.user = loginUser.user;
-         req.session.rol = loginUser.rol;
-        
-
-     
+            res.send({status: "Ok"})
+        } else {
+            res.send({status: "No se pudo hacer el login!"})
+        }
          console.log("la session:")
-         console.log(req.session)
-         
-         res.send("todo ok")
+         console.log(req.session)        
 
-    }catch {
+    } catch {
         res.status(500).send("hubo un error")
     }
     
