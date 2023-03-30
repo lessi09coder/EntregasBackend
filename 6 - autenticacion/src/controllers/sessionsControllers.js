@@ -1,15 +1,10 @@
 const { createUserService, loginUserService } = require('../services/userServices.js')
 const {yesValidPass} = require('../utils/hashPass.js')
 const getUser = async (req, res) => {
-
-    res.render("login",{})
-  
+    res.render("login",{})  
 }
 
-
 const postUserLogin = async (req, res) => {
-
-
     try{
         const username = (req.body)        
         const loginUser = await loginUserService(username)
@@ -29,25 +24,14 @@ const postUserLogin = async (req, res) => {
 
     } catch {
         res.status(500).send("hubo un error")
-    }
-    
-
-    //console.log(` el user devuelto es ${loginUser} `) //anda bien
-    
-
-    //req.session = { user: loginUser.user, rol: loginUser.rol };
-    /*  */
-    
+    }       
 }
 
-const test = ((req, res) => {
-    
+const test = ((req, res) => {    
     console.log("la session que llega:")
-    console.log(req.session)
+    console.log(req.session)    
     
-    
-    res.render("loginAccess", {})
-    
+    res.render("loginAccess", {})    
 })
 
 const getRegister = (req, res) => {
@@ -61,7 +45,6 @@ const getUserRegister = async (req, res) => {
 
     newUser = req.body;
     //newUser = {user: "hola", password:11}
-
     await createUserService(newUser)
     //res.render('register',{})
     //res.send('aca te registras!')

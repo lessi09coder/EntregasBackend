@@ -10,8 +10,6 @@ const userSchema = mongoose.Schema({
 
 });
 
-//luego usar Hash en password
-
 userSchema.pre("save", function (next) {
     const user = this;
     console.log(this)

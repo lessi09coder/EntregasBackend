@@ -16,6 +16,7 @@ sesionsRouter.get('/githubcallback', passport.authenticate("github",{
      async function (req , res) {
           req.session.user = req.user;
           res.send({github: "todo ok github"})
+          //redirec a productos
      }
 )
 
