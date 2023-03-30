@@ -1,8 +1,9 @@
 const passport = require('passport');
 //const localStrategy = require('passport-local');
 const gitHubStrategy = require('passport-github2');
-const userModel = require('../db/model/userModel.js')
+const userSchema = require('../db/model/userModel.js')
 const {
+    getUserByUsernameService,
     getUserByIdService,
     createUserService,
     loginUserService,
@@ -10,26 +11,30 @@ const {
 
 const initPassport = () => {
     passport.serializeUser((user, done) => {
+        console.log(user)
         done(null, user._id);
     });
     passport.deserializeUser(async (id, done) => {
-        console.log(id)
-        const user = await getUserByIdService(id);
+        //console.log(id)
+        let user = await userSchema.findOne ({ _id : id});
+        //const user = await getUserByIdService(id);
         done(null, user);
-    });
-    passport.use(
+    });  
+    
+passport.use(
         "github",
         new gitHubStrategy(
             {
-                clientID: "Iv1.d79dab02884d99d1",
-                clientSecret: "f5e54478c42388a0080c044713bd455a5daaaab6 ",
+                clientID: "Iv1.e5f56889f479f838",
+                clientSecret: "0deaf2b7f4e3e93119ccc56c562ce278544f14c8",
                 callbackUrl: "http://localhost:8080/api/session/githubcallback",
                 scope: ["user: email"]          
             },
             async (accessToken, refreshToken, profile, done) => {
-                console.log("profile:",profile)
+               console.log("profile:",profile)
                 try {
-                    let user = await loginUserService(profile.user)
+                    let user = await getUserByUsernameService(profile._json.login)
+                    console.log("user traido:",user)
                     if (!user) {
                         let newUser = {
                             user: profile._json.login,                            
@@ -39,6 +44,7 @@ const initPassport = () => {
                         console.log("userAdded", userAdded);
                         done(null, userAdded);
                     } else {
+                        console.log("ya existe el user en git:", user)
                         done(null, user);
                     }
                 } catch (error) {
@@ -49,4 +55,4 @@ const initPassport = () => {
     );
 };
 
-module.exports = initPassport;
+module.exports = {initPassport};

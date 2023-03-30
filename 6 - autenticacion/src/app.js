@@ -4,7 +4,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo');
 //const cookieParser = require("cookie-parser");
 const handlebars = require('express-handlebars');
-const initPassport = require('./config/passport.js')
+const {initPassport} = require('./config/passport.js')
 const passport = require('passport')
 //const authRouter = require('./src/routes/auth');
 

@@ -17,4 +17,9 @@ const getUserByIdService = async (id) => {
     return idUserMongoDb
 }
 
-module.exports = { createUserService, loginUserService, getUserByIdService }
+const getUserByUsernameService = async (nameUser) => {
+    const username = await userDAO.findUserByUsername(nameUser)
+    return username
+}
+
+module.exports = { createUserService, loginUserService, getUserByIdService , getUserByUsernameService}

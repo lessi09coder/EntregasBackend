@@ -20,7 +20,14 @@ class UserMongoDbDAO {
     async findUser(user) {
         let existUser = await this.userCollection.findOne({ user: user.username });
         //console.log(existUser)
-        if (!existUser) return { Error: "No existe usuario!" };
+        //if (!existUser) return { Error: "No existe usuario!" };
+        return existUser;
+    }
+
+    async findUserByUsername(nameUser) {
+        let existUser = await this.userCollection.findOne({ user: nameUser });
+        //console.log(existUser)
+        //if (!existUser) return { Error: "No existe usuario!" };
         return existUser;
     }
 
