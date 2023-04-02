@@ -1,0 +1,29 @@
+
+{{#each productsView.docs }}
+    <h2>Producto:</h2>
+    
+       <h3>Nombre: {{title}}</h3>
+       <h4>{{description}}</h4>
+       <h4>{{price}}</h4>
+       <h4>{{stock}}</h4>
+       <h4>{{category}}</h4>
+       <h3>Ir al producto: <a href="/api/products/{{_id}}"><Button>IR</Button></a></h3>
+    
+
+{{/each}}
+
+<div>
+    {{#if productsView.hasPrevPage}}
+        <a href={{productsView.prevLink}}>  Anterior</a>
+    {{/if}}
+    
+     {{#if productsView.hasNextPage}}
+        <a href={{productsView.nextLink}}>Siguiente </a>
+    {{/if}} 
+
+    &nbsp;
+    <p>pagina actual: {{productsView.page}}</p>
+    &nbsp;
+</div>
+ 
+

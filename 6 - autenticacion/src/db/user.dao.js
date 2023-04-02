@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const dbCollecion = "sessionsBase" ;
-mongoose.connect(`mongodb+srv://lessin09:test123@backend.5bixtxm.mongodb.net/${dbCollecion}?retryWrites=true&w=majority`, error => {
+const MONGODB = process.env.MONGODB;
+mongoose.connect(MONGODB, error => {
     if (error) {
         console.log('Cannot connect to db')
         process.exit()
