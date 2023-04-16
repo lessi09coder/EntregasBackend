@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const dbCollecion = "sessionsBase"
+//const dbCollecion = "sessionsBase"
 const MONGODB = process.env.MONGODB
 mongoose.connect(MONGODB, error => {
     if (error) {

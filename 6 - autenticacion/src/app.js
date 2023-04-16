@@ -7,6 +7,7 @@ const handlebars = require('express-handlebars');
 const {Server} = require('socket.io');
 const {initPassport} = require('./config/passport.js');
 const passport = require('passport');
+const { SECRETSESSION, MONGODB, PORT } =require('./config/config.js')
 //const authRouter = require('./src/routes/auth');
 
 const sesionsRouter = require('./routes/sessionsRouter.js');
@@ -17,16 +18,17 @@ const messageRouter = require('./routes/messageRourter.js');
 
 const app = express();
 
-const MONGODB = process.env.MONGODB
+//const MONGODB = process.env.MONGODB
 const mongoStore = MongoStore.create({
     mongoUrl: MONGODB,
     mongoOptions: { useUnifiedTopology: true},
     ttl:500
 });
 
+//const SECRETSESSION = process.env.SECRETSESSION
 app.use(session({
     store: mongoStore,
-    secret: 'secreto123',
+    secret: SECRETSESSION,
     resave: false, 
     saveUninitialized: false
 }));
@@ -49,13 +51,12 @@ app.use('/api/products', productsRouter);
 app.use('/api/carts', cartsRouter);  
 app.use("/api/messages", messageRouter)
 
-app.use('/', (req, res) => {    
-    req.session.user = null
+app.use('/', (req, res) => {        
     res.redirect("api/session/user")
 }); 
 
 
-const PORT = process.env.PORT || 8080;
+//const PORT = process.env.PORT || 8080;
 
 const httpServer = app.listen(PORT, () => {
     console.log(`Server running on port: ${httpServer.address().port}`)

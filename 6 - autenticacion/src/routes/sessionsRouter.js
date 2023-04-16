@@ -3,7 +3,7 @@ const sesionsRouter = Router();
 const passport = require('passport');
 
 const {
-     postUserLogin, getRegister, getUser, getUserRegister,test, auth, getPrivate
+     postUserLogin, getRegister, getUser, getUserRegister,test, auth, getPrivate,getSessionLogout
 } = require("../controllers/sessionsControllers.js")
 
 
@@ -16,9 +16,10 @@ sesionsRouter.get('/githubcallback', passport.authenticate("github",{
      async function (req , res) {
           req.session.user = req.user;
           res.send({github: "todo ok github"})
+
           //redirec a productos
      }
-)
+);
 
 
 sesionsRouter.get('/test', test);
@@ -26,6 +27,6 @@ sesionsRouter.get('/test', test);
 sesionsRouter.get('/register', getRegister);
 sesionsRouter.post('/register', getUserRegister); //localhost:8080/api/session/register
 
-//sesionsRouter.get('/logout', getSessionLogout)
+sesionsRouter.post('/logout', getSessionLogout)
 //sesionsRouter.get('/admin', auth, getPrivate)
 module.exports = sesionsRouter;
