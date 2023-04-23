@@ -7,7 +7,7 @@ const handlebars = require('express-handlebars');
 const {Server} = require('socket.io');
 const {initPassport} = require('./config/passport.js');
 const passport = require('passport');
-const { SECRETSESSION, MONGODB, PORT } =require('./config/config.js')
+const { SECRETSESSION, MONGODB, PORT } = require('./config/config.js');
 //const authRouter = require('./src/routes/auth');
 
 const sesionsRouter = require('./routes/sessionsRouter.js');
