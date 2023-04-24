@@ -86,3 +86,10 @@ io.on('connection', socket => {
 
 
 //crear tickets
+
+
+
+
+//model llama a repository, se conecta con mongodb, lo que devuelve el repository lo recibe dao, dao lo manda a dto y dto a service
+
+//ayuda : model => reposository (este importa el model)  => el dao(agarra las funcioens del repository) => dao retorna el dto

@@ -1,10 +1,8 @@
 const { getCartService, createCartService, addProductCartService, productInCartService } = require("../services/cartsService.js");
 
-
 const getCarts = async (req, res) => {
     let carts = await getCartService()
-    console.log(carts)
-    
+    console.log(carts)    
     res.send(carts)
 };
 
@@ -21,7 +19,7 @@ const addProductCart = async (req, res) => {
 const productInCart = async (req, res) => {
     let proInCart = await productInCartService(req.params.cid)
     console.log(proInCart)
-    res.render('cartHome', { title: "Carrito", proInCart })
+    res.render('cartHBS', { title: "Carrito", proInCart })
 };
 
 module.exports = { getCarts, createCart, addProductCart, productInCart };
