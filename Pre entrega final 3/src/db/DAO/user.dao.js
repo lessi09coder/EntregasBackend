@@ -10,7 +10,40 @@ mongoose.connect(MONGODB, error => {
         process.exit()
     }
 });
-class UserMongoDbDAO {
+
+const convertDataToObj = (data) => {
+    const { _id, user, email, idCart, password, rol } = data;
+    let userDto = new UserDto(_id, user, email, idCart, password, rol);
+    return userDto
+}
+
+class UserDAO {
+    async getUserEmail(email) {
+        const user = await UserModel.findOne({ email: email }).lean();
+        //console.log(`este es el user de UserDao: ${user}`)
+        //return user
+
+        return convertDataToObj(user)
+    }
+
+    async createUser(user, cid) {
+        const newUser = await UserModel.create({
+            ...user,
+            cartId: cid
+        });
+        return newUser;
+    }
+
+    async findUser(user) {
+        let existUser = await UserModel.findOne({ user: user });
+        //console.log(`este es el user de UserDao: ${existUser}`)
+        if (!existUser) return { mesagge: "Usuario inexistente" };
+        return convertDataToObj(existUser);
+    }
+}
+module.exports = UserDAO;
+
+/* class UserMongoDbDAO {
     constructor(collection, schema) {
         this.userCollection = mongoose.model(collection, schema);
     }
@@ -44,4 +77,4 @@ class UserMongoDbDAO {
     }
 }
 
-module.exports = UserMongoDbDAO;
+module.exports = UserMongoDbDAO; */

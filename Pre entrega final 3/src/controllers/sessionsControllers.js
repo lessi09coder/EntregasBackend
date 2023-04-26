@@ -1,41 +1,41 @@
-const { createUserService, loginUserService } = require('../services/userServices.js');
+const { createUserService, loginUserService, getUserEmailService } = require('../services/userServices.js');
 const { yesValidPass } = require('../utils/hashPass.js');
 
 const getUser = async (req, res) => {
-    res.render("login",{})  
+    res.render("login", {})
 };
 
 const postUserLogin = async (req, res) => {
-    try{
+    try {
         console.log(req.body)
         const username = (req.body.user);
         const loginUser = await loginUserService(username);
         console.log(loginUser)
-        console.log(`el pass del body es ${req.body.password}`);
-        const validatePass = yesValidPass(loginUser , req.body.password);
-        console.log(loginUser);
-        if(validatePass) {
+        //console.log(`el pass del body es ${req.body.password}`);
+        const validatePass = yesValidPass(loginUser, req.body.password);
+        
+        if (validatePass) {
             req.session.user = loginUser.user;
             req.session.rol = loginUser.rol;
-
-            res.send({status: "Ok"});
-
-            } else {
-            res.send({status: "No se pudo hacer el login!"})
+            res.send({ status: "Ok" });
+        } else {
+            res.send({ status: "No se pudo hacer el login!" })
         }
-         console.log("la session:");
-         console.log(req.session);
+        
+        console.log("la session:");
+        console.log(req.session);
 
     } catch {
         res.status(500).send("hubo un error!")
     };
 };
 
-const test = (req, res) => {    
+//testeo:
+const test = (req, res) => {
     console.log("la session que llega:")
-    console.log(req.session)    
-    
-    res.render("loginAccess", {})    
+    console.log(req.session)
+
+    res.render("loginAccess", {})
 };
 
 const getRegister = (req, res) => {
@@ -61,6 +61,8 @@ const getSessionLogout = async (req, res) => {
     })
 };
 
+
+//borrar
 const getPrivate = (req, res) => {
     res.send('sos admin');
 };
