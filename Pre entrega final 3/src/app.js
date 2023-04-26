@@ -10,7 +10,7 @@ const passport = require('passport');
 const { SECRETSESSION, MONGODB, PORT } = require('./config/config.js');
 //const authRouter = require('./src/routes/auth');
 
-const sesionsRouter = require('./routes/sessionsRouter.js');
+const userRouter = require('./routes/userRouter.js');
 const productsRouter = require('./routes/productsRouter.js');
 const cartsRouter = require('./routes/cartsRouter.js');
 const messageRouter = require('./routes/messageRourter.js');
@@ -46,7 +46,7 @@ app.use('/recursos', express.static(__dirname + '/public'));
 initPassport();
 app.use(passport.initialize());
 
-app.use('/api/session', sesionsRouter); //localhost:8080/api/session
+app.use('/api/session', userRouter); //localhost:8080/api/session
 app.use('/api/products', productsRouter); 
 app.use('/api/carts', cartsRouter);  
 app.use("/api/messages", messageRouter)

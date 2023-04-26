@@ -7,8 +7,10 @@ const getUser = async (req, res) => {
 
 const postUserLogin = async (req, res) => {
     try{
-        const username = (req.body);
+        console.log(req.body)
+        const username = (req.body.user);
         const loginUser = await loginUserService(username);
+        console.log(loginUser)
         console.log(`el pass del body es ${req.body.password}`);
         const validatePass = yesValidPass(loginUser , req.body.password);
         console.log(loginUser);

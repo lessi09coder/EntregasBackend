@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const ProductsMongoDb = require("../db/products.dao.js")
-const productSchema = require("../db/model/products.model.js");
+const ProductsMongoDb = require("./products.dao.js")
+const productSchema = require("../model/products.model.js");
 //const dbCollecion = "sessionsBase"
 const MONGODB = process.env.MONGODB
 const productDAO = new ProductsMongoDb('products', productSchema)

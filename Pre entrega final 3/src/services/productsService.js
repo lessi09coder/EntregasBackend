@@ -1,4 +1,4 @@
-const ProductsMongoDb = require("../db/products.dao.js");
+const ProductsMongoDb = require("../db/DAO/products.dao.js");
 //import { userSchema } from "../db/models/user.model.js"
 //const userSchema = require('../db/models/user.model.js')
 const productSchema = require("../db/model/products.model.js");

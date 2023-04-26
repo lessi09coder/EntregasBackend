@@ -1,13 +1,14 @@
 const getUser = async () => {
-    const user = document.getElementById('email-user').value;
+    const userName = document.getElementById('loggin-user').value;
     const pass = document.getElementById('password-user').value;
-    //console.log(user , pass)
+    console.log(userName , pass)
+
     await fetch('/api/session/userPost', {
       method: 'post',
       mode: 'cors',
       cache: 'no-cache',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: user, password: pass })
+      body: JSON.stringify({ user: userName, password: pass })
     })
     .then(response => response.text())
     //.then(response => response.json())

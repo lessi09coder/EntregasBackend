@@ -1,14 +1,15 @@
 
 const addUserForm = async () => {
-    const Valueuser = document.getElementById("email-User").value;
-    const Valuepassword = document.getElementById("password-User").value;
-    console.log(Valueuser , Valuepassword)
+    const ValueUser = document.getElementById("user-User").value;
+    const ValueEmail = document.getElementById("email-User").value;
+    const ValuePassword = document.getElementById("password-User").value;
+    console.log(ValueUser , ValueEmail ,ValuePassword)
     await fetch("/api/session/register",{
         method: "post",
         mode: "cors",
         cache: "no-cache",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user: Valueuser, password: Valuepassword })
+        body: JSON.stringify({ user: ValueUser, email:ValueEmail, password: ValuePassword })
     })
     .then(response => response.text())
     .then(responseText => console.log(responseText))

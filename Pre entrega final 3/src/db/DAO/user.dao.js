@@ -1,5 +1,8 @@
+const UserModel = require("../model/userModel.js")
+const UserDto = require('../DTO/userDto.js')
+
 const mongoose = require("mongoose");
-//const dbCollecion = "sessionsBase" ;
+
 const MONGODB = process.env.MONGODB;
 mongoose.connect(MONGODB, error => {
     if (error) {
@@ -20,7 +23,7 @@ class UserMongoDbDAO {
         return newUser;
     }
     async findUser(user) {
-        let existUser = await this.userCollection.findOne({ user: user.username });
+        let existUser = await this.userCollection.findOne({ user: user });
         //console.log(existUser)
         //if (!existUser) return { Error: "No existe usuario!" };
         return existUser;
