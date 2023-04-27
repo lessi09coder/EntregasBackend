@@ -45,7 +45,7 @@ const getRegister = (req, res) => {
 const getUserRegister = async (req, res) => {
     const { user, password } = req.body;
     console.log(req.body);
-    console.log(user, password);
+    //console.log(user, password);
 
     newUser = req.body;
     //newUser = {user: "hola", password:11}

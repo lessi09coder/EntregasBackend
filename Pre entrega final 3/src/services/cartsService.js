@@ -1,32 +1,33 @@
 const CartRepository = require("../db/repository/cartsRepo.js");
+const cartRepo = new CartRepository()
 //import { userSchema } from "../db/models/user.model.js"
 //const userSchema = require('../db/models/user.model.js')
-const CartModel = require("../db/model/carts.model.js");
+//const CartModel = require("../db/model/carts.model.js");
 
 //en la clase ContendedorMongoDb tenemos la colleccion y al lado el esquema indicado
 
 
-/* const cartDAO = new CartsMongoDb('carts', cartSchema)
+//const cartDAO = new CartsMongoDb('carts', cartSchema)
+
+const createCartService = async () => {
+    let response = await cartRepo.createCartRepo()
+    return response
+};
 
 const getCartService = async () => {
-    let users = await cartDAO.getCarts()
+    let users = await cartRepo.getCartRepo()
     return users
 }
 
-const createCartService = async (cart) => {
-    let response = await cartDAO.createCart(cart)
-    return response
-}
-
 const addProductCartService = async (id, productId) => {
-    let response = await cartDAO.addProductCart(id, productId)
+    let response = await cartRepo.addProductCart(id, productId)
     return response
 }
 
 const productInCartService = async (prodId) => {
-    let getProductInCart = await cartDAO.getProductsInCart(prodId)
+    let getProductInCart = await cartRepo.getProductsInCartRepo(prodId)
     return getProductInCart
 }
 
 
-module.exports = { getCartService, createCartService, addProductCartService, productInCartService };   */
+module.exports = { createCartService, getCartService, addProductCartService, productInCartService };

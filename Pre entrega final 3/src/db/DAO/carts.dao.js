@@ -29,11 +29,11 @@ class CartDAO {
         }
     }
 
-    createCart() {
+    async createCart() {
         try {
-            let result = new CartModel
-            let newCart = result.save()
-            return newCart
+            let result = await CartModel.create({})
+            //let newCart = result.save()
+            return result
         } catch (error) {
             console.log(error)
         }
@@ -41,7 +41,7 @@ class CartDAO {
 
     async addProductCart(id, proId) {
         try {
-            const cartById = await CartModel.cartsCollection.findOne({ _id: id })
+            const cartById = await CartModel.findOne({ _id: id })
             if (!cartById) {
                 return `no existe un carrito con el id: ${id}`
             }
@@ -69,7 +69,7 @@ class CartDAO {
 
     async getProductsInCart(cartId) {
         try{
-            const cartById = await this.cartsCollection.findOne({ _id: cartId }).lean()
+            const cartById = await CartModel.findOne({ _id: cartId }).lean()
                     .populate("products.product")
             if(!cartById){
                 return `no existe un carrito con el id: ${cartId}`

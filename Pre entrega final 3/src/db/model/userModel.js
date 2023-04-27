@@ -4,7 +4,7 @@ const { createHash } = require("../../utils/hashPass.js");
 const userSchema = mongoose.Schema({
     user: { type: String, unique: true, required: true },
     email: { type: String, unique: true, required: true },
-    idCart: { type: String },
+    idCart: { type: String ,require: true },
     password: { type: String },
     rol: { type: String, default: "usuario" },
 });

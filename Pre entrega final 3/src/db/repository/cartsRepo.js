@@ -3,18 +3,18 @@ const cartDAO = new CartDAO();
 
 class CartRepository {
 
-    createCartRepo = async (user, cartId) => {
-        const cart = await cartDAO.createUser(user, cartId);
+    createCartRepo = async () => {
+        const cart = await cartDAO.createCart();
         return cart;
     };
 
-    findCartRepo = async (user) => {
-        const cart = await cartDAO.findUser(user);
+    getCartRepo = async (e) => {
+        const cart = await cartDAO.getCarts(e);
         return cart;
     };
 
-    getCartByEmailRepo = async (email) => {
-        const user = await cartDAO.getUserEmail(email);
+    getProductsInCartRepo = async (email) => {
+        const user = await cartDAO.getProductsInCart(email);
         return user;
     }
 

@@ -27,11 +27,13 @@ class UserDAO {
     }
 
     async createUser(user, cid) {
+        console.log(cid)
         const newUser = await UserModel.create({
             ...user,
-            cartId: cid
+            idCart: cid
         });
-        return newUser;
+        console.log(newUser)
+        return convertDataToObj(newUser);
     }
 
     async findUser(user) {
