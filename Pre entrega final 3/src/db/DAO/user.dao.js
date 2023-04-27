@@ -44,7 +44,6 @@ class UserDAO {
 module.exports = UserDAO;
 
 
-//borrar:
 /* class UserMongoDbDAO {
     constructor(collection, schema) {
         this.userCollection = mongoose.model(collection, schema);

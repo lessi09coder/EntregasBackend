@@ -1,6 +1,6 @@
 const AddCartProduct = async () => {
-    const cartId = "testcartId"
-    const productId = "testproductId"
+   // const cartId = "testcartId"
+   // const productId = "testproductId"
     
     console.log(cartId,productId)
 

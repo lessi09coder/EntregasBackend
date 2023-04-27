@@ -1,22 +1,23 @@
-const CartDAO = require('../DAO/cart.dao.js');
+const CartDAO = require('../DAO/carts.dao.js');
 const cartDAO = new CartDAO();
 
-class UserRepository {
+class CartRepository {
 
-    createUserRepo = async (user, cartId) => {
-        const newUser = await cartDAO.createUser(user, cartId);
-        return newUser;
+    createCartRepo = async (user, cartId) => {
+        const cart = await cartDAO.createUser(user, cartId);
+        return cart;
     };
 
-    getUserByEmailRepo = async (email) => {
+    findCartRepo = async (user) => {
+        const cart = await cartDAO.findUser(user);
+        return cart;
+    };
+
+    getCartByEmailRepo = async (email) => {
         const user = await cartDAO.getUserEmail(email);
         return user;
     }
 
-    findUserRepo = async (user) => {
-        const userInDB = await cartDAO.findUser(user);
-        return userInDB;
-    };
 }
 
-module.exports = UserRepository
+module.exports = CartRepository

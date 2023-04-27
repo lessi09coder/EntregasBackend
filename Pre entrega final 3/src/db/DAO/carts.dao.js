@@ -1,7 +1,9 @@
+const CartModel = require("../model/carts.model.js");
+const CartsDTO = require("../DTO/cartsDto.js")
+
 const mongoose = require("mongoose");
-const ProductsMongoDb = require("./products.dao.js")
-const productSchema = require("../model/products.model.js");
-//const dbCollecion = "sessionsBase"
+
+
 const MONGODB = process.env.MONGODB
 //const productDAO = new ProductsMongoDb('products', productSchema)
 
@@ -11,6 +13,78 @@ mongoose.connect(MONGODB, error => {
         process.exit()
     }
 });
+
+
+class CartDAO {
+
+    async getCarts() {
+        try {
+            let carts = await CartModel.find().lean()
+            //.lean() es para usar HBS o tambien podemos instalar las dependencias de dev "npm i -D handlebars@versionQueSea"
+
+            //console.log(products)
+            return carts
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    createCart() {
+        try {
+            let result = new CartModel
+            let newCart = result.save()
+            return newCart
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async addProductCart(id, proId) {
+        try {
+            const cartById = await CartModel.cartsCollection.findOne({ _id: id })
+            if (!cartById) {
+                return `no existe un carrito con el id: ${id}`
+            }
+
+            const productById = await productDAO.getProductById({ _id: proId })
+            if (!productById) {
+                return `no existe un producto con el id: ${proId}`
+            }
+
+            const indexPro = cartById.products.findIndex(e => String(e.product) === proId)
+            if(indexPro >= 0) {
+                cartById.products[indexPro].qt += 1
+            } else {
+                const newProd = {product: proId}
+                cartById.products.push(newProd)
+            }
+
+            const saveCart = await cartById.save()
+            return saveCart.products
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    async getProductsInCart(cartId) {
+        try{
+            const cartById = await this.cartsCollection.findOne({ _id: cartId }).lean()
+                    .populate("products.product")
+            if(!cartById){
+                return `no existe un carrito con el id: ${cartId}`
+            }
+            const prod = cartById.products
+            return prod
+            
+        }catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+module.exports = CartDAO
+
 /* 
 class CartsMongoDb {
 

@@ -1,10 +1,12 @@
-const CartsMongoDb = require("../db/DAO/carts.dao.js");
+const CartRepository = require("../db/repository/cartsRepo.js");
 //import { userSchema } from "../db/models/user.model.js"
 //const userSchema = require('../db/models/user.model.js')
-const cartSchema = require("../db/model/carts.model.js");
+const CartModel = require("../db/model/carts.model.js");
 
 //en la clase ContendedorMongoDb tenemos la colleccion y al lado el esquema indicado
-const cartDAO = new CartsMongoDb('carts', cartSchema)
+
+
+/* const cartDAO = new CartsMongoDb('carts', cartSchema)
 
 const getCartService = async () => {
     let users = await cartDAO.getCarts()
@@ -27,4 +29,4 @@ const productInCartService = async (prodId) => {
 }
 
 
-module.exports = { getCartService, createCartService, addProductCartService, productInCartService };  
+module.exports = { getCartService, createCartService, addProductCartService, productInCartService };   */
