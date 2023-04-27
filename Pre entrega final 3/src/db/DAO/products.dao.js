@@ -1,3 +1,6 @@
+const ProductMongodb = require('../model/products.model.js')
+const ProductDTO = require('../DTO/productsDto.js')
+
 const mongoose = require("mongoose");
 //const dbCollecion = "sessionsBase"
 const MONGODB = process.env.MONGODB
@@ -8,6 +11,58 @@ mongoose.connect(MONGODB, error => {
     }
 });
 
+// _id, title, description, price, status, stock, category, thumbnail
+
+const convertDataToObj = (data) => {
+    const { _id, title, description, price, status, stock, category, thumbnail } = data;
+    let ProductDto = new ProductDTO(_id, title, description, price, status, stock, category, thumbnail);
+    return ProductDto
+}
+
+class ProductsDAO {
+
+    async getProducts(limit, page) {
+        try {
+
+            let products = await ProductMongodb.paginate({}, { limit: limit, page: page, lean: true })
+            products.prevLink = products.hasPrevPage ? `http://localhost:8080/api/products?page=${products.prevPage}` : '';
+            products.nextLink = products.hasNextPage ? `http://localhost:8080/api/products?page=${products.nextPage}` : '';
+
+            return convertDataToObj(products)
+        } catch (error) {
+            return { message: error }
+        }
+    }
+
+    async createProduct(prod) {
+        console.log(prod)
+        try {
+            let newProduct = new ProductMongodb(prod)
+            let result = await newProduct.save()
+            return result
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async getProductById(id) {
+        try {
+            const product = await ProductMongodb.findOne({ _id: id }).lean()
+            console.log(product)
+            if (!product) {
+                return `no existe el producto con el id ${id}`
+            }
+            return convertDataToObj(product)
+        }
+        catch (error) {
+            console.log(error)
+        }
+
+    }
+}
+
+module.exports = ProductsDAO
+/* 
 class ProductsMongoDb {
 
     constructor(collection, schema) {
@@ -55,4 +110,4 @@ class ProductsMongoDb {
 };
 
 
-module.exports = ProductsMongoDb;
+module.exports = ProductsMongoDb; */

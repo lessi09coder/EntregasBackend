@@ -12,4 +12,6 @@ const productSchema = mongoose.Schema({
 });
 productSchema.plugin(mongoosePaginate)
 
-module.exports = productSchema;
+const ProductMongodb = mongoose.model('products', productSchema);
+
+module.exports = ProductMongodb;

@@ -2,7 +2,7 @@ const UserDAO = require('../DAO/user.dao.js');
 const userDAO = new UserDAO();
 
 class UserRepository {
-    
+
     createUserRepo = async (user, cartId) => {
         const newUser = await userDAO.createUser(user, cartId);
         return newUser;
@@ -18,6 +18,5 @@ class UserRepository {
         return userInDB;
     };
 }
-
 
 module.exports = UserRepository

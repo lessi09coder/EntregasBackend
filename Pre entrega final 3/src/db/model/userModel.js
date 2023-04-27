@@ -21,6 +21,4 @@ userSchema.pre("save", function (next) {
 
 const UserMongodb = mongoose.model('users', userSchema);
 
-
-
 module.exports = UserMongodb

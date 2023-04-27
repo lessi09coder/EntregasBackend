@@ -3,7 +3,7 @@ const ProductsMongoDb = require("./products.dao.js")
 const productSchema = require("../model/products.model.js");
 //const dbCollecion = "sessionsBase"
 const MONGODB = process.env.MONGODB
-const productDAO = new ProductsMongoDb('products', productSchema)
+//const productDAO = new ProductsMongoDb('products', productSchema)
 
 mongoose.connect(MONGODB, error => {
     if (error) {
@@ -11,7 +11,7 @@ mongoose.connect(MONGODB, error => {
         process.exit()
     }
 });
-
+/* 
 class CartsMongoDb {
 
     constructor(collection, schema) {
@@ -85,4 +85,4 @@ class CartsMongoDb {
 };
 
 
-module.exports = CartsMongoDb;
+module.exports = CartsMongoDb; */
