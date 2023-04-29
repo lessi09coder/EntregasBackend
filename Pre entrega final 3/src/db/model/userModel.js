@@ -13,7 +13,8 @@ userSchema.pre("save", function (next) {
     const user = this;
     if (user.email === "adminCoder@coder.com" &&
         user.password === "adminCod3r123") {
-        user.rol = "admin";
+        user.rol = "admin",
+        user.idCart = ""
     }
     user.password = createHash(this.password);
     next();

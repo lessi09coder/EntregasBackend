@@ -19,4 +19,14 @@ const getUserEmailService = async (userEmail) => {
     return username
 };
 
-module.exports = { createUserService, loginUserService, getUserEmailService };
+const getUserIdService = async (id) => {
+    const username = await userRepo.getUserByIdRepo(id)
+    return username
+};
+
+const getUserByEmailPassportService = async (email) => {
+    const username = await userRepo.getUserByEmailPassportRepo(email)
+    return username
+}; 
+
+module.exports = { createUserService, loginUserService, getUserEmailService, getUserIdService, getUserByEmailPassportService };

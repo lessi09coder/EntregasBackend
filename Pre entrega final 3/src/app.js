@@ -1,5 +1,6 @@
 const express = require('express');
 require('dotenv').config();
+const app = express();
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 //const cookieParser = require("cookie-parser");
@@ -10,13 +11,16 @@ const passport = require('passport');
 const { SECRETSESSION, MONGODB, PORT } = require('./config/config.js');
 //const authRouter = require('./src/routes/auth');
 
+initPassport();
+app.use(passport.initialize());
+
 const userRouter = require('./routes/userRouter.js');
 const productsRouter = require('./routes/productsRouter.js');
 const cartsRouter = require('./routes/cartsRouter.js');
 const messageRouter = require('./routes/messageRourter.js');
 //loggin y Register de usuarios:
 
-const app = express();
+
 
 //const MONGODB = process.env.MONGODB
 const mongoStore = MongoStore.create({
@@ -43,13 +47,15 @@ app.use('/recursos', express.static(__dirname + '/public'));
 
 //app.use(cookieParser("secretoelcode"))
 
-initPassport();
-app.use(passport.initialize());
 
 app.use('/api/session', userRouter); //localhost:8080/api/session
 app.use('/api/products', productsRouter); 
 app.use('/api/carts', cartsRouter);  
 app.use("/api/messages", messageRouter)
+
+initPassport();
+app.use(passport.initialize());
+
 
 app.use('/', (req, res) => {        
     res.redirect("api/session/user")

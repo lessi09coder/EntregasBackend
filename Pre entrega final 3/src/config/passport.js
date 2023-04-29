@@ -1,20 +1,24 @@
 const passport = require('passport');
 //const localStrategy = require('passport-local');
 const gitHubStrategy = require('passport-github2');
-const userSchema = require('../db/model/userModel.js')
+const UserModel = require('../db/model/userModel.js')
+
+
+//Cree "getUserByEmailPassportService" porque el dto de user me devolvia data._id era null (?
 const {   
     createUserService,
-    loginUserService,
+    getUserIdService,
+    getUserByEmailPassportService
 } = require("../services/userServices.js");
 
 const initPassport = () => {
     passport.serializeUser((user, done) => {
-        console.log(user)
+        console.log("El user de github :" ,user)
         done(null, user._id);
     });
     passport.deserializeUser(async (id, done) => {
         //console.log(id)
-        let user = await userSchema.findOne ({ _id : id});
+        let user = await getUserIdService(id);
         
         done(null, user);
     });  
@@ -29,13 +33,14 @@ passport.use(
                 scope: ["user: email"]          
             },
             async (accessToken, refreshToken, profile, done) => {
-               console.log("profile:",profile)
+               console.log("profile:",profile.username)
                 try {
-                    let user = await getUserByUsernameService(profile._json.login)
+                    let user = await getUserByEmailPassportService(profile.username)
                     console.log("user traido:",user)
-                    if (!user) {
-                        let newUser = {
-                            user: profile._json.login,                            
+                    if (user == null) {
+                        let newUser = {                            
+                            user: profile.username,
+                            email: profile.username,                            
                             password: "",
                         };
                         let userAdded = await createUserService(newUser);

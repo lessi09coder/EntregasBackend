@@ -17,6 +17,17 @@ class UserRepository {
         const userInDB = await userDAO.findUser(user);
         return userInDB;
     };
+
+    getUserByIdRepo = async (id) => {
+        const userInDB = await userDAO.getUserId(id);
+        return userInDB;
+    };
+
+    getUserByEmailPassportRepo = async (email) => {
+        const user = await userDAO.getUserEmailPassport(email);
+        return user;
+    }
+    
 }
 
 module.exports = UserRepository
