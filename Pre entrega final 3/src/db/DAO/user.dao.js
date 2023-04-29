@@ -12,7 +12,7 @@ mongoose.connect(MONGODB, error => {
 });
 
 const convertDataToObj = (data) => {    
-    console.log("la data es:",data)
+    //console.log("la data es:",data)
     const { _id, user, email, idCart, password, rol } = data;
     let userDto = new UserDto(_id, user, email, idCart, password, rol);
     return userDto
@@ -20,34 +20,33 @@ const convertDataToObj = (data) => {
 
 class UserDAO {
     async getUserEmail(email) {
+        console.log(email)
         const user = await UserModel.findOne({ email: email }).lean();
-        console.log(`este es el user de UserDao: ${user}`)
+        console.log(`!!este es el user de UserDao getUserEmail: ${user}`)
         //return user
         
         return convertDataToObj(user)
     }
 
     async getUserEmailPassport(email) {
-        const user = await UserModel.findOne({ email: email }).lean();
-        console.log(`este es el user de UserDao: ${user}`)
-        //return user
+        const user = await UserModel.findOne({ email: email }).lean();          
         
         return user
     }
 
     async createUser(user, cid) {
-        console.log(cid)
+        //console.log(cid)
         const newUser = await UserModel.create({
             ...user,
             idCart: cid
         });
-        console.log(newUser)
+        //console.log(newUser)
         return convertDataToObj(newUser);
     }
 
     async findUser(user) {
         let existUser = await UserModel.findOne({ user: user });
-        //console.log(`este es el user de UserDao: ${existUser}`)
+        //console.log(`este es el user de UserDao!!: ${existUser}`)
         if (!existUser) return { mesagge: "Usuario inexistente" };
         return convertDataToObj(existUser);
     }

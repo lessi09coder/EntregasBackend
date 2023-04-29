@@ -7,7 +7,7 @@ class UserRepository {
         const newUser = await userDAO.createUser(user, cartId);
         return newUser;
     };
-
+    
     getUserByEmailRepo = async (email) => {
         const user = await userDAO.getUserEmail(email);
         return user;

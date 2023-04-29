@@ -10,6 +10,7 @@ const {
 //si usamos el sessionsRouter.use(auth), todos los endpoints pediran que tengamos autorizacion
 userRouter.get('/user', getUser);
 userRouter.post('/userPost', postUserLogin);
+
 userRouter.get('/github', passport.authenticate("github", {scope: ["user:email"]}) , async(req, res) => {});
 userRouter.get('/githubcallback', passport.authenticate("github",{
      failureRedirect: "api/session/login/user"}),

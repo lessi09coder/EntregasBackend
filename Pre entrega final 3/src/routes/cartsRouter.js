@@ -7,7 +7,11 @@ const cartsRouter = Router();
 cartsRouter.get('/', areYouUser, getCarts);
 cartsRouter.post('/', createCart);
 //cartsRouter.post('/:cid/product/:pid', addProductCart) este es el de antes!
-cartsRouter.post('/:cid/product/:pid', areYouAdmin, addProductCart);
+cartsRouter.post('/:cid/product/:pid', areYouUser, addProductCart);
 cartsRouter.get('/:cid', areYouUser, productInCart);
+
+
+//app.use('/api/carts', cartsRouter);
+//http://localhost:8080/api/carts/644ad895697e7a8327705558/product/6429bcccef6cdd151e1d1b59
 
 module.exports = cartsRouter;

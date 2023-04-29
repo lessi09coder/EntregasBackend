@@ -67,12 +67,12 @@ class CartDAO {
         }
     }
 
-    async getProductsInCart(cartId) {
+    async getProductsInCart(idCart) {
         try {
-            const cartById = await CartModel.findOne({ _id: cartId }).lean()
+            const cartById = await CartModel.findOne({ _id: idCart }).lean()
                 .populate("products.product")
             if (!cartById) {
-                return `no existe un carrito con el id: ${cartId}`
+                return `no existe un carrito con el id: ${idCart}`
             }
             const prod = cartById.products
             return prod

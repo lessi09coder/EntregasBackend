@@ -7,7 +7,7 @@ class productRepository {
         const newProduct = await productDAO.createProduct(prod);
         return newProduct;
     };
-
+    
     getProductRepo = async (limit, page) => {
         const products = await productDAO.getProducts(limit, page);
         return products;

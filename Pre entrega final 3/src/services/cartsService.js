@@ -19,8 +19,8 @@ const getCartService = async () => {
     return users
 }
 
-const addProductCartService = async (id, productId) => {
-    let response = await cartRepo.addProductToCartRepo(id, productId)
+const addProductCartService = async (cid, pid) => {
+    let response = await cartRepo.addProductToCartRepo(cid, pid)
     return response
 }
 

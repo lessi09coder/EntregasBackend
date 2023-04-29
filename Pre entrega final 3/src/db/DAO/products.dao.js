@@ -33,7 +33,7 @@ class ProductsDAO {
             return { message: error }
         }
     }
-
+    
     async createProduct(prod) {
         console.log(prod)
         try {
@@ -47,8 +47,7 @@ class ProductsDAO {
 
     async getProductById(id) {
         try {
-            const product = await ProductModel.findOne({ _id: id }).lean()
-            console.log(product)
+            const product = await ProductModel.findOne({ _id: id }).lean()            
             if (!product) {
                 return `no existe el producto con el id ${id}`
             }
