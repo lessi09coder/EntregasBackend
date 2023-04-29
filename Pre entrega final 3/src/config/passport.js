@@ -2,9 +2,7 @@ const passport = require('passport');
 //const localStrategy = require('passport-local');
 const gitHubStrategy = require('passport-github2');
 const userSchema = require('../db/model/userModel.js')
-const {
-    getUserByUsernameService,
-    getUserByIdService,
+const {   
     createUserService,
     loginUserService,
 } = require("../services/userServices.js");
@@ -17,7 +15,7 @@ const initPassport = () => {
     passport.deserializeUser(async (id, done) => {
         //console.log(id)
         let user = await userSchema.findOne ({ _id : id});
-        //const user = await getUserByIdService(id);
+        
         done(null, user);
     });  
     

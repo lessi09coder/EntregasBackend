@@ -84,5 +84,5 @@ io.on('connection', socket => {
 })
 
 
-//seguir pasando capas en cart, para agregar productos en el carrito
+
 //crear tickets

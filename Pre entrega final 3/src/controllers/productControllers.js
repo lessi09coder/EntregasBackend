@@ -1,5 +1,10 @@
 const { getProductService, createProductService, getProductByIdService } = require("../services/productsService.js");
 
+const addProduct= (req, res) => {
+    let response = createProductService(req.body);
+    res.send(response);
+};
+
 const getProducts = async (req, res) => {
     const limit = req.query.limit || 3;
     const page = req.query.page || 1;       
@@ -16,9 +21,5 @@ const getProdudtById = async (req , res) => {
     res.render('productIDHBS' , {title: "Producto por ID", productsView , user});
 };
 
-const addProduct= (req, res) => {
-    let response = createProductService(req.body);
-    res.send(response);
-};
 
 module.exports = { getProducts , addProduct , getProdudtById};

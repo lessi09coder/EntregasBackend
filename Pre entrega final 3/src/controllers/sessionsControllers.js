@@ -16,6 +16,7 @@ const postUserLogin = async (req, res) => {
         
         if (validatePass) {
             req.session.user = loginUser.user;
+            req.session.email = loginUser.email
             req.session.rol = loginUser.rol;
             res.send({ status: "Ok" });
         } else {

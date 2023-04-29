@@ -13,11 +13,16 @@ class CartRepository {
         return cart;
     };
 
-    getProductsInCartRepo = async (email) => {
-        const user = await cartDAO.getProductsInCart(email);
+    addProductToCartRepo = async (cid, pid) => {
+        const cart = await cartDAO.addProductToCart(cid, pid)
+        return cart
+    }
+    getProductsInCartRepo = async (pid) => {
+        const user = await cartDAO.getProductsInCart(pid);
         return user;
     }
 
+    
 }
 
 module.exports = CartRepository

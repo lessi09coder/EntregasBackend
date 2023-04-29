@@ -39,23 +39,23 @@ class CartDAO {
         }
     }
 
-    async addProductCart(id, proId) {
+    async addProductToCart(cid, pid) {
         try {
-            const cartById = await CartModel.findOne({ _id: id })
+            const cartById = await CartModel.findOne({ _id: cid })
             if (!cartById) {
-                return `no existe un carrito con el id: ${id}`
+                return `no existe un carrito con el id: ${cid}`
             }
 
-            const productById = await productDAO.getProductById({ _id: proId })
+            /* const productById = await productDAO.getProductById({ _id: pid })
             if (!productById) {
-                return `no existe un producto con el id: ${proId}`
-            }
+                return `no existe un producto con el id: ${pid}`
+            } */
 
-            const indexPro = cartById.products.findIndex(e => String(e.product) === proId)
-            if(indexPro >= 0) {
+            const indexPro = cartById.products.findIndex(e => String(e.product) === pid)
+            if (indexPro >= 0) {
                 cartById.products[indexPro].qt += 1
             } else {
-                const newProd = {product: proId}
+                const newProd = { product: pid }
                 cartById.products.push(newProd)
             }
 
@@ -68,16 +68,16 @@ class CartDAO {
     }
 
     async getProductsInCart(cartId) {
-        try{
+        try {
             const cartById = await CartModel.findOne({ _id: cartId }).lean()
-                    .populate("products.product")
-            if(!cartById){
+                .populate("products.product")
+            if (!cartById) {
                 return `no existe un carrito con el id: ${cartId}`
             }
             const prod = cartById.products
             return prod
-            
-        }catch (error) {
+
+        } catch (error) {
             console.log(error)
         }
     }

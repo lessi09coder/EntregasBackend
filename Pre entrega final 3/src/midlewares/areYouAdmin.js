@@ -1,7 +1,8 @@
-const { getUserByUsernameService } = require('../services/userServices.js');
+const { getUserEmailService } = require('../services/userServices.js');
 
 const areYouAdmin = async (req, res, next) => {
-    const user = await getUserByUsernameService(req.session?.user);
+    const user = await getUserEmailService(req.session?.user);
+    console.log(user)
     if (user?.rol === "admin") {
         next();
     } else {
