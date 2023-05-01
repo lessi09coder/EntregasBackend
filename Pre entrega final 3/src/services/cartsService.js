@@ -24,8 +24,8 @@ const addProductCartService = async (cid, pid) => {
     return response
 }
 
-const productInCartService = async (prodId) => {
-    let getProductInCart = await cartRepo.getProductsInCartRepo(prodId)
+const productInCartService = async (cid) => {
+    let getProductInCart = await cartRepo.getProductsInCartRepo(cid)
     return getProductInCart
 }
 

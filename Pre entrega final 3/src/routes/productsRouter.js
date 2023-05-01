@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const {getProducts , addProduct , getProdudtById} = require("../controllers/productControllers.js");
+const { getProducts, addProduct, getProdudtById } = require("../controllers/productControllers.js");
 const areYouAdmin = require("../midlewares/areYouAdmin.js");
 
 const productsRouter = Router();

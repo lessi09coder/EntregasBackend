@@ -1,5 +1,5 @@
 {{#if user}}
-        <h3>Usuario conectado: {{this.user}}</h3>
+        <h3>Usuario conectado: {{user.user}}</h3>
 {{else}}
 {{/if}}
 
@@ -31,6 +31,6 @@
     &nbsp;
 </div>
  
-
+<h2><button onclick="location.href = '/api/carts/{{user.idCart}}'">Ir a Carrito.</button></h2>
 {{!--  <script src="/js/addCartProduct.js"></script> --}}
 

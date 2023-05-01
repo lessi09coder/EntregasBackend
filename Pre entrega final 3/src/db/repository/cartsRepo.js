@@ -17,8 +17,8 @@ class CartRepository {
         const cart = await cartDAO.addProductToCart(cid, pid)
         return cart
     }
-    getProductsInCartRepo = async (pid) => {
-        const user = await cartDAO.getProductsInCart(pid);
+    getProductsInCartRepo = async (cid) => {
+        const user = await cartDAO.getProductsInCart(cid);
         return user;
     }
 

@@ -18,6 +18,7 @@ const addProductCart = async (req, res) => {
     res.send(addProduct)
 };
 
+// este no va
 const productInCart = async (req, res) => {
     let proInCart = await productInCartService(req.params.cid)
     //console.log(proInCart)

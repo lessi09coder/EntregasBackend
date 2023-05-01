@@ -13,6 +13,8 @@
     <h3>Categoria: {{productsViewId.category}} </h3>
     <h3>comprar: <button  onclick="addCartProduct('{{user.idCart}}','{{productsViewId._id}}')">Agregar</button></h3>
     
-    <h2><a class="" href="http://localhost:8080/api/products">Todos los productos</a></h2>
+    <h2><a class="" href="http://localhost:8080/api/products">Todos los productos.</a></h2>
+    
+    <h2><button onclick="location.href = '/api/carts/{{user.idCart}}'">Ir a Carrito.</button></h2>
 
 <script src="/js/addCartProduct.js"></script>
