@@ -11,9 +11,7 @@
        <h4>Precio: $ {{price}}</h4>
        <h4>Disponibilidad: {{stock}} pares.</h4>
        <h4>Categoria: {{category}}</h4>
-       <h3>Ir al producto: <a href="/api/products/{{_id}}"><Button>IR</Button></a></h3>
-       <h3>Agregar al carrito <button id="agregarProducto">AGREGAR</button></h3>
-    
+       <h3>Ir al producto: <a href="/api/products/{{_id}}"><Button>IR</Button></a></h3>          
 
 {{/each}}
 
@@ -32,5 +30,5 @@
 </div>
  
 <h2><button onclick="location.href = '/api/carts/{{user.idCart}}'">Ir a Carrito.</button></h2>
-{{!--  <script src="/js/addCartProduct.js"></script> --}}
+
 

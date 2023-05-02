@@ -23,7 +23,7 @@ class ProductsDAO {
 
     async getProducts(limit, page) {
         try {
-            
+
             let products = await ProductModel.paginate({}, { limit: limit, page: page, lean: true })
             products.prevLink = products.hasPrevPage ? `http://localhost:8080/api/products?page=${products.prevPage}` : '';
             products.nextLink = products.hasNextPage ? `http://localhost:8080/api/products?page=${products.nextPage}` : '';
@@ -33,7 +33,7 @@ class ProductsDAO {
             return { message: error }
         }
     }
-    
+
     async createProduct(prod) {
         console.log(prod)
         try {
@@ -47,7 +47,7 @@ class ProductsDAO {
 
     async getProductById(id) {
         try {
-            const product = await ProductModel.findOne({ _id: id }).lean()            
+            const product = await ProductModel.findOne({ _id: id }).lean()
             if (!product) {
                 return `no existe el producto con el id ${id}`
             }
@@ -56,7 +56,33 @@ class ProductsDAO {
         catch (error) {
             console.log(error)
         }
+    }
 
+    async UpdateProductById(pid, update) {
+        try {
+            const updateProduct = await ProductModel.findByIdAndUpdate({ _id: pid }, {stock: update}, { new: true })
+            if (updateProduct == null) {
+                return { error: `No existe producto con id:${pid} para actualizar` }
+            }
+            return {message:`Elproducto con id:${pid} se actualizo` }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async deleteProductById(pid) {
+        try {
+            const deleteProduct = await ProductModel.deleteOne({ _id: pid })
+            if (deleteProduct == null) {
+                return { error: `No existe producto con id:${pid}` }
+            }
+            const productRemoved = { message: `El producto con el id: ${pid} ha sido elimnado correctamente` }
+            return productRemoved
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 

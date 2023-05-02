@@ -20,5 +20,13 @@ const getProductByIdService = async (id) => {
     return product
 }
 
+const updateProductIdService = async (pid , update) => {
+    let product = productRepo.updateProductIdRepo(pid , update)
+    return product
+}
 
-module.exports = { createProductService , getProductService, getProductByIdService };
+const deleteProductByIdService = async (pid) => {
+    let product = productRepo.deleteProductByIdRepo(pid)
+    return product
+}
+module.exports = { createProductService , getProductService, getProductByIdService, updateProductIdService, deleteProductByIdService };

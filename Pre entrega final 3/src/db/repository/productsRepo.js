@@ -17,6 +17,16 @@ class productRepository {
         const product = await productDAO.getProductById(id);
         return product;
     };
+
+    updateProductIdRepo  = async (pid, update) => {
+        const product = await productDAO.UpdateProductById(pid, update);
+        return product;
+    };
+
+    deleteProductByIdRepo  = async (id) => {
+        const product = await productDAO.deleteProductById(id);
+        return product;
+    };
 }
 
 module.exports = productRepository

@@ -1,13 +1,18 @@
-{{#each proInCart}}
 <h1>Carrito con su id  </h1>
+
+{{#each proInCart}}
+<h2>Calzado: {{this.product.title}} </h2>
 <ul>    
-    <li>Calzado: {{this.product.title}} </li>
+    
     <li>Categoria: {{this.product.category}} </li>
     <li>Precio: ${{this.product.price}} </li>
     <li>Cantidad a comprar : {{this.qt}} </li>
-</ul>
 
+</ul>
 
 {{/each}}
 
-<h1>aca pondremos el boton de compra</h1>
+
+<button id="comprar">Comprar</button>
+
+<script src="/js/purchase.js"></script>
