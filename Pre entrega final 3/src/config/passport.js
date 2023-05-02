@@ -13,7 +13,7 @@ const {
 
 const initPassport = () => {
     passport.serializeUser((user, done) => {
-        console.log("El user de github :" ,user)
+        //console.log("El user de github :" ,user)
         done(null, user._id);
     });
     passport.deserializeUser(async (id, done) => {
@@ -47,7 +47,7 @@ passport.use(
                         console.log("userAdded", userAdded);
                         done(null, userAdded);
                     } else {
-                        console.log("ya existe el user en git:", user)
+                        //console.log("ya existe el user en git:", user)
                         done(null, user);
                     }
                 } catch (error) {

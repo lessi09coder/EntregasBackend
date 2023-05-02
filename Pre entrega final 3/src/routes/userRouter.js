@@ -16,8 +16,11 @@ userRouter.get('/githubcallback', passport.authenticate("github",{
      failureRedirect: "api/session/login/user"}),
      async function (req , res) {
           //traemos dentro de user , el user que es la cuenta de github y lo ubicamos en sessions.user
-          req.session.user = req.user.user;
-         
+          req.session.user = req.user.user;         
+          req.session.email = req.user.email
+          req.session.rol = req.user.rol;
+          req.session.idCart = req.user.idCart
+          
           res.redirect("/api/products");       
      }
 );
