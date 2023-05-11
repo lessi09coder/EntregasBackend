@@ -1,0 +1,32 @@
+<div class="">
+  <div class="">
+
+    <h1><a class="" href="http://localhost:8080/">LOGIN</a></h1>
+    <br>
+    <form class="" id="get-user">
+
+      <div class="">
+        <h2>Ingresar con un usuario:</h2>
+        <input id="loggin-user" name='email' placeholder="usuario" class="form-control" type="text" required>
+      </div>
+
+      <div class="">
+        <h2>Coloque su contraseña:</h2>
+        <input id="password-user" name='password' placeholder="password" class="form-control" type="password" required>
+      </div>
+
+      <div class="">
+        <input class="" type="submit" value="Login">
+      </div>
+    </form>
+
+    <hr>
+    <div class="">
+      <button onclick="location.href = '/api/session/github'">Cuenta GitHub</button>
+      <button onclick="location.href = '/api/session/register'">Ir a Register</button>
+      <button onclick="location.href = '/api/products'">Productos</button>      
+      <button id="logout">Salir del login</button>
+    </div>
+  </div>
+</div>
+<script src="/js/loginUser.js"></script>

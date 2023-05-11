@@ -1,0 +1,18 @@
+<h1>Carrito con su id  </h1>
+
+{{#each proInCart}}
+<h2>Calzado: {{this.product.title}} </h2>
+<ul>    
+    
+    <li>Categoria: {{this.product.category}} </li>
+    <li>Precio: ${{this.product.price}} </li>
+    <li>Cantidad a comprar : {{this.qt}} </li>
+
+</ul>
+
+{{/each}}
+
+
+<button id="comprar">Comprar</button>
+
+<script src="/js/purchase.js"></script>
