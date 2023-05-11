@@ -13,7 +13,7 @@ const generateProduct = () => {
         id: faker.datatype.uuid(),
         title: faker.commerce.productName(),
         description: faker.lorem.sentence(),
-        price: faker.commerce.price(),
+        price: Number(faker.commerce.price(1000,2000,0)),
         status: true,
         stock: faker.datatype.number(),
         category: faker.commerce.department(),        
