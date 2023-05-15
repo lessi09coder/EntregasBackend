@@ -1,8 +1,13 @@
 const { Router } = require("express");
-const { getProductsMock } = require("../controllers/mockingProductsControllers.js")
+const { getProductsMock, postProductsMock } = require("../controllers/mockingProductsControllers.js")
 const mockingproductsRouter = Router();
 
-mockingproductsRouter.get('/', getProductsMock);
 
+
+
+
+mockingproductsRouter.post('/', postProductsMock);
+
+mockingproductsRouter.get('/', postProductsMock);
 
 module.exports = mockingproductsRouter

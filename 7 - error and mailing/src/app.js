@@ -9,6 +9,7 @@ const {Server} = require('socket.io');
 const {initPassport} = require('./config/passport.js');
 const passport = require('passport');
 const { SECRETSESSION, MONGODB, PORT } = require('./config/config.js');
+const errorHandler = require('./midlewares/errors/index.js')
 //const authRouter = require('./src/routes/auth');
 
 initPassport();
@@ -56,6 +57,9 @@ app.use('/api/carts', cartsRouter);
 app.use('/api/messages', messageRouter)
 app.use('/api/mockingproducts' , mockingproductsRouter)
 app.use('/api/errors', errorsRouter )
+
+
+
 initPassport();
 app.use(passport.initialize());
 
@@ -93,5 +97,4 @@ io.on('connection', socket => {
 })
 
 
-
-//crear tickets
+app.use(errorHandler)

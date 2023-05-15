@@ -3,4 +3,4 @@ const EErrors = {
     EMPTY_FIELD_ERROR:3
 }
 
-module.exports = EErrors
+module.exports = EErrors 

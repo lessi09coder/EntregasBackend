@@ -1,49 +1,80 @@
 const { generateManyProducts } = require("../mocks/generateProducts.js");
 const CustomError = require('../services/errors/CustomError.js')
 const EErrors = require('../services/errors/enumsErrors.js');
-const  generateProductErrorInfo  = require('../services/errors/infoErrors.js')
+const generateProductErrorInfo = require('../services/errors/infoErrors.js')
 
 
-const productoFailed = [
-    {
-    _id: 'd944b76a-7a06-419b-8227-d5febe7adb8f',
-    title: undefined,
-    description: 'Dolores doloremque recusandae quaerat odio iste.',
-    price: 1768,
-    status: true,
-    stock: 12221,
-    category: 'Shoes',
-    thumbnail: 'https://loremflickr.com/640/480'
-    },
-]
-
-
-
-
-const getProductsMock = async (req, res) => {
+const postProductsMock = (req, res) => {
     let ejemplo = 100;
-    //const productMock = generateManyProducts(ejemplo)
-    const productMock= productoFailed
-    console.log(productMock)
-    let successCant = 0;
-    const errors = productMock.map((a) => {
-        
 
-        if(!a.title || !a.category ){
-            //corregir esto
-            return generateProductErrorInfo(a)
-        } else {
-           
-            successCant += 1               
-            
+
+    const productoFailed = [
+        {
+            _id: 'd944b76a-7a06-419b-8227-d5febe7adb8f',
+            title: undefined,
+            description: 'Dolores doloremque recusandae quaerat odio iste.',
+            price: 1768,
+            status: true,
+            stock: 12221,
+            category: 'Shoes',
+            thumbnail: 'https://loremflickr.com/640/480'
+        },
+        {
+            _id: 'd944b76a-7a06-419b-8227-d5febe7adb8f',
+            title: "ahaosaf",
+            description: 'Dolores doloremque recusandae quaerat odio iste.',
+            price: undefined,
+            status: true,
+            stock: 12221,
+            category: 'Shoes',
+            thumbnail: 'https://loremflickr.com/640/480'
         }
-        
-    })
-    
-    console.log(errors)
+    ];
+
+    //const productMock = generateManyProducts(ejemplo)
+    const productMock = productoFailed
+
+    console.log(productMock)
+    const successCant = 0;
+
+    const errorsMap = productMock.map((a) => {
+
+        if (!a.title || !a.price) {
+
+            console.log(generateProductErrorInfo(a))
+
+            CustomError.createError({
+                name: "Product Creation error",
+                cause: generateProductErrorInfo(a),
+                message: "Error trying to create product",
+                code: EErrors.EMPTY_FIELD_ERROR
+            })
 
 
-    res.send({ status: 'success', ProductOk:successCant  })
+            /* CustomError.createError({
+                name: "ProductCreationError",
+                cause: "Causa del error",
+                message: "Error al intentar crear el producto",
+                code: 123
+              }); */
+
+        } else {
+            //esto no se si esta bien codeado
+            successCant += 1
+
+            res.send({ status: "success", payload: successCant })
+        }
+
+    });
+    console.log(errorsMap)
+
+
+    res.send({ status: "success", payload: errorsMap })
+
 };
 
-module.exports = { getProductsMock }
+const getProductsMock = (req, res) => {
+    res.send({ status: "success", payload: "hola" })
+}
+
+module.exports = { getProductsMock, postProductsMock }
