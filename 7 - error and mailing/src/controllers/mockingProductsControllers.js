@@ -3,7 +3,6 @@ const CustomError = require('../services/errors/CustomError.js')
 const EErrors = require('../services/errors/enumsErrors.js');
 const generateProductErrorInfo = require('../services/errors/infoErrors.js')
 
-
 const postProductsMock = (req, res) => {
     let ejemplo = 100;
 
@@ -40,8 +39,6 @@ const postProductsMock = (req, res) => {
     const errorsMap = productMock.map((a) => {
 
         if (!a.title || !a.price) {
-
-            console.log(generateProductErrorInfo(a))
 
             CustomError.createError({
                 name: "Product Creation error",
