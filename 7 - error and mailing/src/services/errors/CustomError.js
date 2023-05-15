@@ -6,3 +6,5 @@ class CustomError {
         throw error;
     }
 }
+
+module.exports = CustomError
