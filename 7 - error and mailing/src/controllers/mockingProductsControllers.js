@@ -4,8 +4,7 @@ const EErrors = require('../services/errors/enumsErrors.js');
 const generateProductErrorInfo = require('../services/errors/infoErrors.js')
 
 const postProductsMock = (req, res) => {
-    let ejemplo = 100;
-
+    let ejemplo = 100;    
 
     const productoFailed = [
         {
@@ -32,8 +31,7 @@ const postProductsMock = (req, res) => {
 
     //const productMock = generateManyProducts(ejemplo)
     const productMock = productoFailed
-
-    console.log(productMock)
+   
     const successCant = 0;
 
     const errorsMap = productMock.map((a) => {
@@ -47,6 +45,7 @@ const postProductsMock = (req, res) => {
                 code: EErrors.EMPTY_FIELD_ERROR
             })
 
+           
 
             /* CustomError.createError({
                 name: "ProductCreationError",
@@ -54,7 +53,7 @@ const postProductsMock = (req, res) => {
                 message: "Error al intentar crear el producto",
                 code: 123
               }); */
-
+              
         } else {
             //esto no se si esta bien codeado
             successCant += 1
