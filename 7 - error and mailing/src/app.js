@@ -72,7 +72,9 @@ app.get('/', (req, res) => {
 
 
 app.get('/logger', (req, res) => {
-    req.logger.warning('ALERTA!')
+    req.logger.debug('Este es verbose')
+    req.logger.info('Ingreso en la ruta raiz')
+    req.logger.warning('Este es un warn')
     res.send({ message: "Prueba de logger" })
 });
 

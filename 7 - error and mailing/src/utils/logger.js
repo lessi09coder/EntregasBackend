@@ -7,7 +7,7 @@ const customLevelsOptions = {
         warning: 2,
         info: 3,
         http: 4,
-        verbose: 5,
+        debug: 5,
     },
     colors: {
         fatal: 'magenta',
@@ -15,10 +15,50 @@ const customLevelsOptions = {
         warning: 'yellow',
         info: 'green',
         http: 'cyan',
-        verbose: 'gray',
+        debug: 'gray',
     }
 };
 
+const buildProdLogger = () => {
+
+    const logger = winston.createLogger({
+        levels: customLevelsOptions.levels,
+        transports: [
+            new winston.transports.Console({
+                level: 'info',
+                format: winston.format.combine(
+                    winston.format.colorize({ colors: customLevelsOptions.colors }),
+                    winston.format.simple()
+                )
+            }),
+            new winston.transports.File({
+                filename: './error.log',
+                level: 'warning',
+                format: winston.format.simple()
+            })
+        ]
+    })
+    return logger;
+}
+
+const buildDevLogger = () => {
+    const logger = winston.createLogger({
+        levels: customLevelsOptions.levels,
+        transports: [
+            new winston.transports.Console({
+                level: 'debug',
+                format: winston.format.combine(
+                    winston.format.colorize({ colors: customLevelsOptions.colors }),
+                    winston.format.simple()
+                )
+            }),
+            //new winston.transports.File({ filename: './file.log', level: 'info' })
+        ]
+    })
+    return logger;
+}
+
+/* 
 const logger = winston.createLogger({
     levels: customLevelsOptions.levels,
     transports: [
@@ -35,11 +75,19 @@ const logger = winston.createLogger({
             format: winston.format.simple()
         })
     ]
-});
+});  */
 
-const addLogger = (req, res, next) => {    
+
+if (process.env.LOGGER === "production") {
+    logger = buildProdLogger()
+} else {
+    logger = buildDevLogger()
+}
+
+
+const addLogger = (req, res, next) => {
     req.logger = logger;
-    req.logger.http(`${req.method} en ${req.url} - ${new Date().toLocaleDateString}`)
+    //req.logger.http(`${req.method} en ${req.url} - ${new Date().toLocaleDateString}`)
     next();
 }
 
