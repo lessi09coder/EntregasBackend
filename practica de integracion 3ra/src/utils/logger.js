@@ -1,5 +1,5 @@
 const winston = require('winston');
-
+const LOGGER = require('../config/config.js')
 const customLevelsOptions = {
     levels: {
         fatal: 0,
@@ -79,8 +79,8 @@ const logger = winston.createLogger({
     ]
 });  */
 
-
-if (process.env.LOGGER === "production") {
+//testear 
+if (LOGGER === "production") {
     logger = buildProdLogger()
 } else {
     logger = buildDevLogger()

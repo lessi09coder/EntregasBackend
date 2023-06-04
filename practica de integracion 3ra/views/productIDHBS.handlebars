@@ -1,0 +1,20 @@
+{{#if user}}
+        <h3>Usuario conectado: {{user.user}}</h3>
+        <h3>Rol usuario: {{user.rol}}</h3>   
+        <h3>Carrito usuario: {{user.idCart}}</h3>    
+{{else}}
+{{/if}}
+
+    <h2>El calzado seleccionado es " {{productsViewId.title}} "  </h2>
+    
+    <h3>Descripcion: {{productsViewId.description}} </h3>
+    <h3>Precio: ${{productsViewId.price}} </h3>
+    <h3>Quedan: {{productsViewId.stock}} pares</h3>
+    <h3>Categoria: {{productsViewId.category}} </h3>
+    <h3>comprar: <button  onclick="addCartProduct('{{user.idCart}}','{{productsViewId._id}}')">Agregar</button></h3>
+    
+    <h2><a class="" href="http://localhost:8080/api/products">Todos los productos.</a></h2>
+    
+    <h2><button onclick="location.href = '/api/carts/{{user.idCart}}'">Ir a Carrito.</button></h2>
+
+<script src="/js/addCartProduct.js"></script>
