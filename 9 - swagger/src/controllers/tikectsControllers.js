@@ -38,9 +38,7 @@ const purchaseProductsTicket = async (req, res) => {
                 purchase_datetime: new Date(),
                 amount: totalPurchase,
                 purchaser: req.session?.user
-            }
-            console.log(ticket)
-        
+            }                   
         }
         res.send({ticket: ticket , noPurchase: noTicket})
 

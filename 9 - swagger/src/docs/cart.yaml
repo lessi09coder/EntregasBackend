@@ -1,0 +1,111 @@
+paths:
+  /api/cart:
+    get:
+      summary: Obtengo todos los carritos existentes.
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Los carritos fueron obtenidos exitosamente.
+          content:
+            aplication/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#components/schemas/Products'
+        "500": 
+          description: Error interno del server.      
+    post:
+      summary: Crea un carrito. 
+      tags:
+        - Carts    
+      responses:
+        "200":
+          description: El carrito fue creado exitosamente.             
+        "500": 
+          description: Error interno del server.  
+
+  /api/cart/{cid}/product/{pid}:
+    post:
+      summary: Agrega un producto a un carrito determinado.
+      tags:
+        - Carts        
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: id del carrito a agregar un producto.
+          schema:
+            type: String  
+        - name: pid
+          in: path
+          required: true
+          description: Id del producto a ser agregado a un carrito.
+          schema:
+            type: String   
+      responses:
+        "200":
+          description: El producto fue agregado a un carrito exitosamente.             
+        "500": 
+          description: Error interno del server.  
+
+  /api/cart/{cid}:
+    get:
+      summary: Trae los productos de un carrito determinado.
+      tags:
+        - Carts        
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Id del carrito a buscar los productos.
+          schema:
+            type: String  
+      responses:
+        "200":
+          description: Los productos fueron traidos exitosamente.             
+        "500": 
+          description: Error interno del server. 
+
+  api/cart/{cid}/purchase:
+    get:
+      summary: Realiza la compra del carrito seleccionado.
+      tags:
+        - Carts        
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Id del carrito para comprar sus productos.
+          schema:
+            type: String  
+    responses:
+        "200":
+          description: Los productos fueron comprados exitosamente exitosamente, su ticket.             
+        "500": 
+          description: Error interno del server. 
+          
+components:
+    schemas:
+      Carts:
+        type: object
+        Products:
+          type: array
+          properties:
+            _id: 
+              type: boolean
+              description: Esta en false por defecto, no requiere Id.
+            product:
+              type: mongoose.Schema.Types.ObjectId
+              ref: products
+              description: Trae los productos por referencia de mongoDB.
+            qt:
+              type: Number
+              description: Cantidad de productos, por default es 1.
+        example:           
+          products: [
+            {             
+              product: ObjectId("325656497854"),
+              qt: 2
+            }
+          ]

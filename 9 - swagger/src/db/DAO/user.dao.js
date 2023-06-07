@@ -13,6 +13,9 @@ mongoose.connect(MONGODB, error => {
 
 const convertDataToObj = (data) => {
     //console.log("la data es:",data)
+    if(data === null){
+        return {mesagge: "no hay un usuario conectado"}
+    }
     const { _id, user, email, idCart, password, rol } = data;
     let userDto = new UserDto(_id, user, email, idCart, password, rol);
     return userDto

@@ -6,7 +6,10 @@ const cartSchema = mongoose.Schema({
         product: {
             type: mongoose.Schema.Types.ObjectId, ref: 'products'
         },
-        qt: { type: Number, default: 1 }
+        qt: { 
+            type: Number,
+            default: 1 
+        }
     }]
 });
 

@@ -2,7 +2,6 @@ const ProductModel = require('../model/products.model.js')
 const ProductDTO = require('../DTO/productsDto.js')
 
 const mongoose = require("mongoose");
-//const dbCollecion = "sessionsBase"
 const MONGODB = process.env.MONGODB
 mongoose.connect(MONGODB, error => {
     if (error) {
@@ -10,8 +9,6 @@ mongoose.connect(MONGODB, error => {
         process.exit()
     }
 });
-
-// _id, title, description, price, status, stock, category, thumbnail
 
 const convertDataToObj = (data) => {
     const { _id, title, description, price, status, stock, category, thumbnail } = data;

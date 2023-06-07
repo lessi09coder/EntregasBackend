@@ -1,0 +1,171 @@
+paths:
+  /api/products:
+    get:
+      summary: Obtengo todos los productos paginados.
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Los productos fueron obtenidos correctamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#components/schemas/Products'
+        "500": 
+          description: Error interno del server.
+    post:
+      summary: Crea un nuevo producto.
+      tags:
+        - Products
+      resquestBody:
+        requeride: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/inputProduct'
+      responses:
+        "200":
+          description: El producto fue agregado correctamente.
+          content:
+            application/json:
+              schema:                
+                  $ref: '#components/schemas/Products'
+        "500": 
+          description: Error interno del server.  
+  /api/products/{pid}:
+    get:
+      summary: Obtengo un producto por su id.
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          description: id del producto a buscar.          
+          schema:
+            type: String
+      responses:
+        "200":
+          description: El producto fue obtenido correctamente por su id.
+          content:
+            application/json:
+              schema:                
+                $ref: '#components/schemas/Products'
+        "500":
+          description: Error interno del server.    
+    put:
+      summary: Actualiza producto por su id.
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id del producto a actualizar.
+          schema:
+            type: String
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requestBodies/inputProduct'
+      responses:
+        "200":
+          description: El producto fue actualizado correctamente por su id.
+          content:
+            application/json:
+              schema:                
+                  $ref: '#components/schemas/Products'
+        "500": 
+          description: Error interno del server.  
+  /api/products/delete/{pid}:
+    delete:
+      summary: Borra un producto por su id.
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: id del producto a borrar.
+          schema:
+            type: String        
+      responses:
+        "200":
+          description: El producto fue borrado correctamente por su id.          
+        "500": 
+          description: Error interno del server.
+components:
+  schemas:
+    Products:
+      type: object
+      properties:
+        _id: 
+          type: ObjectId
+          description: Id autogenedado de mongo.
+        title: 
+          type: String
+          description: Nombre del proucto
+        description:
+          type: String
+          description: Descripcion del proucto.
+        price:
+          type: Number
+          description: Precio del producto.
+        status:
+          type: Boolean
+          description: Status del producto.
+        stock:
+          type: Number
+          description: Cantidad de stock del producto.
+        category:
+          type: String
+          description: Categoria del producto.
+        thumbnail:
+          type: String
+          description: link de una miniatura del producto.
+      example:
+        _id: ObjectId("325656497854")      
+        title: Red          
+        description: Zapato de moda          
+        price: 6566         
+        status: true          
+        stock: 20         
+        category: Moda        
+        thumbnail: www.example.com/imagen1  
+  requestBodies:
+    inputProduct:
+      type: object
+      properties:
+        title: 
+          type: String
+          description: Nombre del proucto
+        description:
+          type: String
+          description: Descripcion del proucto.
+        price:
+          type: Number
+          description: Precio del producto.
+        status:
+          type: Boolean
+          description: Status del producto.
+        stock:
+          type: Number
+          description: Cantidad de stock del producto.
+        category:
+          type: String
+          description: Categoria del producto.
+        thumbnail:
+          type: String
+          description: link de una miniatura del producto.        
+      example:             
+        title: Red2      
+        description: Zapato de moda          
+        price: 5900     
+        status: true          
+        stock: 18       
+        category: Moda        
+        thumbnail: www.example.com/imagen2
