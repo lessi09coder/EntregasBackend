@@ -1,7 +1,6 @@
 const getUser = async () => {
     const userName = document.getElementById('loggin-user').value;
-    const pass = document.getElementById('password-user').value;
-    console.log(userName , pass)
+    const pass = document.getElementById('password-user').value;    
 
     await fetch('/api/session/userPost', {
       method: 'post',
@@ -14,12 +13,10 @@ const getUser = async () => {
     //.then(response => response.json())
     .then(responseText => console.log(responseText))      
     .catch(error => console.error(error));
-}
-  
+};  
 
 document.getElementById("get-user").addEventListener("submit", (event) => {
-  event.preventDefault();
-  console.log("escucha evento login")
+  event.preventDefault();  
   getUser();
 });
 
@@ -36,11 +33,10 @@ const loguotUser = async () => {
   //.then(response => response.json())
   .then(responseText => console.log(responseText))      
   .catch(error => console.error(error));
-}
+};
 
 document.getElementById("logout").addEventListener("click", (event) => {
-  event.preventDefault();
-  console.log("escucha evento logout")
+  event.preventDefault();  
   loguotUser();
 });
 

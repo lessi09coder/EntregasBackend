@@ -11,7 +11,6 @@ const createProductService = (prod) => {
 
 const getProductService = async (limit, page) => {
     let product = await productRepo.getProductRepo(limit, page)
-    //console.log(users)
     return product
 }
 
@@ -20,8 +19,8 @@ const getProductByIdService = async (id) => {
     return product
 }
 
-const updateProductIdService = async (pid , update) => {
-    let product = productRepo.updateProductIdRepo(pid , update)
+const updateProductIdService = async (pid, update) => {
+    let product = productRepo.updateProductIdRepo(pid, update)
     return product
 }
 
@@ -29,4 +28,5 @@ const deleteProductByIdService = async (pid) => {
     let product = productRepo.deleteProductByIdRepo(pid)
     return product
 }
-module.exports = { createProductService , getProductService, getProductByIdService, updateProductIdService, deleteProductByIdService };
+
+module.exports = { createProductService, getProductService, getProductByIdService, updateProductIdService, deleteProductByIdService };

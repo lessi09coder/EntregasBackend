@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon src/app.js",
     "start": "node src/app.js",
-    "test": " mocha src/test/Supertest.test.js --timeout 10000"
+    "test1": " mocha src/test/products.test.js --timeout 10000"
   },
   "keywords": [],
   "author": "",

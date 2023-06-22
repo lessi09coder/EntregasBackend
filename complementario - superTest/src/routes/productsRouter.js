@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getProducts, addProduct, getProdudtById, deleteProduct } = require("../controllers/productControllers.js");
+const { getProducts, addProduct, getProdudtById, updateProduct, deleteProduct } = require("../controllers/productControllers.js");
 const areYouAdmin = require("../midlewares/areYouAdmin.js");
 
 const productsRouter = Router();
@@ -9,8 +9,8 @@ productsRouter.get('/:pid', getProdudtById);
 
 productsRouter.post('/', addProduct);
 
-productsRouter.put('/:pid')
-productsRouter.delete('/delete/:pid', areYouAdmin, deleteProduct )
+productsRouter.put('/:pid', updateProduct)
+productsRouter.delete('/delete/:pid', deleteProduct )
 module.exports = productsRouter;
 
 

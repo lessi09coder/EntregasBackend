@@ -32,13 +32,14 @@ class ProductsDAO {
     }
 
     async createProduct(prod) {
-        console.log(prod)
         try {
             let newProduct = new ProductModel(prod)
             let result = await newProduct.save()
-            return result
+            const testeo = convertDataToObj(result)
+            console.log(testeo)
+            return testeo
         } catch (error) {
-            console.log(error)
+            return { message: error }
         }
     }
 
@@ -57,11 +58,11 @@ class ProductsDAO {
 
     async UpdateProductById(pid, update) {
         try {
-            const updateProduct = await ProductModel.findByIdAndUpdate({ _id: pid }, { stock: update }, { new: true })
+            const updateProduct = await ProductModel.findByIdAndUpdate({ _id: pid }, update, { new: true })
             if (updateProduct == null) {
                 return { error: `No existe producto con id:${pid} para actualizar` }
             }
-            return { message: `Elproducto con id:${pid} se actualizo` }
+            return convertDataToObj(updateProduct)
 
         } catch (error) {
             return { error: error.message }
@@ -70,12 +71,11 @@ class ProductsDAO {
 
     async deleteProductById(pid) {
         try {
-            const deleteProduct = await ProductModel.deleteOne({ _id: pid })
+            const deleteProduct = await ProductModel.deleteOne({ _id: pid })            
             if (deleteProduct == null) {
                 return { error: `No existe producto con id:${pid}` }
             }
-            const productRemoved = { message: `El producto con el id: ${pid} ha sido elimnado correctamente` }
-            return productRemoved
+            return convertDataToObj(deleteProduct)
 
         } catch (error) {
             return { error: error.message }
