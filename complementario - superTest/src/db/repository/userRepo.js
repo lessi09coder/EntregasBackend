@@ -32,6 +32,12 @@ class UserRepository {
         const res = await userDAO.updatePasswordRepo(idUser, newPassword);
         return res;
     }
+
+    deleteUserRepo = async (uid) => {
+        console.log(uid)
+        const res = await userDAO.deleteUser(uid);
+        return res;
+    }
 }
 
 module.exports = UserRepository

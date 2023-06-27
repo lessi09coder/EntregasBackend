@@ -13,8 +13,8 @@ mongoose.connect(MONGODB, error => {
 
 const convertDataToObj = (data) => {
     //console.log("la data es:",data)
-    if(data === null){
-        return {mesagge: "no hay un usuario conectado"}
+    if (data === null) {
+        return { mesagge: "no hay un usuario conectado" }
     }
     const { _id, user, email, idCart, password, rol } = data;
     let userDto = new UserDto(_id, user, email, idCart, password, rol);
@@ -72,6 +72,11 @@ class UserDAO {
         } catch (error) {
             return { error: error.message }
         }
+    }
+
+    async deleteUser(uid) {
+        const deleteUser = await UserModel.deleteOne({ _id: uid })
+        return convertDataToObj(deleteUser)
     }
 }
 module.exports = UserDAO;

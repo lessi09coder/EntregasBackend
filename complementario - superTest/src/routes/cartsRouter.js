@@ -8,7 +8,7 @@ const cartsRouter = Router();
 cartsRouter.get('/', areYouUser, getCarts);
 cartsRouter.post('/', createCart);
 //cartsRouter.post('/:cid/product/:pid', addProductCart) este es el de antes!
-cartsRouter.post('/:cid/product/:pid', areYouUser, addProductCart);
+cartsRouter.post('/:cid/product/:pid', addProductCart);
 
 
 cartsRouter.get('/:cid', areYouUser, productInCart);

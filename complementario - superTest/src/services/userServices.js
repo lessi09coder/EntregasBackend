@@ -34,4 +34,9 @@ const updatePasswordService = async (idUser , newPassword) => {
     return res
 }; 
 
-module.exports = { createUserService, loginUserService, getUserEmailService, getUserIdService, getUserByEmailPassportService, updatePasswordService };
+const deleteUserService = async (uid) => {
+    const res = await userRepo.deleteUserRepo(uid)
+    return res
+}; 
+
+module.exports = { createUserService, loginUserService, getUserEmailService, getUserIdService, getUserByEmailPassportService, updatePasswordService , deleteUserService};

@@ -7,15 +7,13 @@ const getCarts = async (req, res) => {
 };
 
 const createCart = async (req, res) => {
-    let AddCart = await createCartService()
-    res.send(AddCart)
+    let AddCart = await createCartService()    
+    res.send({ status: "success", data: AddCart, payload: `el carrito ${AddCart._id} fue creado.` })
 };
 
-const addProductCart = async (req, res) => {
-    //console.log("params recibidos en addProductCart:" ,req.params.cid, req.params.pid)
+const addProductCart = async (req, res) => {    
     let addProduct = await addProductCartService(req.params.cid, req.params.pid)
-    
-    res.send(addProduct)
+    res.send({ status: "success", data: addProduct, payload: `el producto: ${req.params.pid} fue agregado al carrito: ${req.params.cid} .` })
 };
 
 // este no va

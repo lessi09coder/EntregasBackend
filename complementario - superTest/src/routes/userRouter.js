@@ -7,13 +7,12 @@ const {
      getRegister,
      getUser,
      getUserRegister,
-     auth,     
-     test,
      getSessionLogout,
      formForgotPassword,
      forgotPassword,
      formResetPassword,
-     resetPassword
+     resetPassword,
+     deleteUser
 } = require("../controllers/sessionsControllers.js")
 
 //const { } = require('')
@@ -37,9 +36,6 @@ userRouter.get('/githubcallback', passport.authenticate("github", {
      }
 );
 
-
-userRouter.get('/test', test);
-
 userRouter.get('/register', getRegister);
 userRouter.post('/register', getUserRegister); //localhost:8080/api/session/register
 
@@ -49,7 +45,7 @@ userRouter.get("/forgotPassword", formForgotPassword)
 userRouter.post("/forgotPassword", forgotPassword)
 userRouter.get("/resetPassword", formResetPassword)
 userRouter.post("/resetPassword", resetPassword)
-
+userRouter.delete('/delete/:uid' , deleteUser)
 
 //sesionsRouter.get('/admin', auth, getPrivate)
 module.exports = userRouter;

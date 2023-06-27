@@ -1,6 +1,6 @@
-const { createUserService, loginUserService, getUserEmailService, getUserIdService, updatePasswordService } = require('../services/userServices.js');
+const { createUserService, loginUserService, getUserEmailService, getUserIdService, updatePasswordService, deleteUserService } = require('../services/userServices.js');
 const { getTokenByUserIdService, createTokenService, updateTokenService, deleteTokenByIdService } = require('../services/tokenService.js')
-const { yesValidPass, isValidToken , createHash} = require('../utils/hashPass.js');
+const { yesValidPass, isValidToken, createHash } = require('../utils/hashPass.js');
 const { tokenRamdon } = require('../utils/TokenPassword.js')
 const sendMailToUser = require('../utils/sendEmailUser.js')
 const getUser = async (req, res) => {
@@ -21,10 +21,9 @@ const postUserLogin = async (req, res) => {
             req.session.email = loginUser.email
             req.session.rol = loginUser.rol;
             req.session.idCart = loginUser.idCart
-            res.send({ status: "Ok" });
-
+            res.send({ status: "success", data: req.session, payload: `el usuario ${req.session.user} esta loggeado.` });
         } else {
-            res.send({ status: "No se pudo hacer el login!" })
+            res.send({ status: "error", payload: "no se pudo loggear el usuario." })
         }
 
     } catch {
@@ -32,28 +31,28 @@ const postUserLogin = async (req, res) => {
     };
 };
 
-//testeo:
-const test = (req, res) => {
+//testeo: para borrar
+/* const test = (req, res) => {
     console.log("la session que llega:")
     console.log(req.session)
 
     res.render("loginAccess", {})
-};
+}; */
 
 const getRegister = (req, res) => {
     res.render("register", {});
 };
 
 const getUserRegister = async (req, res) => {
-    const { user, password } = req.body;
-    console.log(req.body);
+    //const { user, password } = req.body;
+    //console.log(req.body);
     //console.log(user, password);
 
-    newUser = req.body;
+    const newUserData = req.body;
     //newUser = {user: "hola", password:11}
-    await createUserService(newUser);
+    const newUser = await createUserService(newUserData);
     //res.render('register',{})
-    //res.send('aca te registras!')
+    res.send({ status: "success", data: newUser, payload: `el usuario ${req.session.user} esta loggeado.` })
 };
 
 const getSessionLogout = async (req, res) => {
@@ -69,26 +68,26 @@ const formForgotPassword = async (req, res) => {
 }
 const forgotPassword = async (req, res, next) => {
     try {
-        const user = await getUserEmailService(req.body.email);             
+        const user = await getUserEmailService(req.body.email);
         const token = tokenRamdon();
         const expirationDate = new Date(Date.now() + 60 * 60 * 1000);
         const resetUrl = `${req.protocol}://${req.get('host')}/api/user/resetPassword`
         const tokenReset = await getTokenByUserIdService(user._id);
 
-        if (tokenReset.error) {            
+        if (tokenReset.error) {
             createTokenService(token, user._id, expirationDate);
         } else {
             tokenReset.token = createHash(token);
-            tokenReset.expirationDate = expirationDate;       
+            tokenReset.expirationDate = expirationDate;
             await updateTokenService(tokenReset);
         }
-        
-        sendMailToUser(token, user.email , resetUrl);
+
+        sendMailToUser(token, user.email, resetUrl);
         const currentTime = new Date();
         const timeDifference = expirationDate - currentTime;
         setTimeout(() => {
             deleteTokenByIdService(tokenReset._id)
-        }, timeDifference); 
+        }, timeDifference);
         res.status(201).send({ status: "success", payload: `El token de recuperacion ha sido enviado al email: ${user.email}` })
 
     } catch (error) {
@@ -129,28 +128,38 @@ const resetPassword = async (req, res, next) => {
         next(error)
     }
 }
-
-
-
-//este auth pasarlo a la carpeta middlewares
-const auth = (req, res, next) => {
-    if (req.session.admin) {
-        next();
-    } else {
-        res.send('no sos admin');
+const deleteUser = async (req , res, next) =>{
+    //usar uid en params del body
+    console.log("iniciando delete user:")
+    try{
+        const uid = req.params.uid        
+        const user = await getUserIdService(uid)
+        const deleteUser = await deleteUserService(uid)
+        console.log(user)
+        if(deleteUser.error){
+            throw new Error("Usuario Inexistente")
+        }
+        else{
+            res.send({ status: "success", payload: `${user.user} ha sido eliminado`, data: deleteUser})
+        }
+    }catch (error){
+        next(error)
     }
-};
+}
+
+
+
+
 
 module.exports = {
     postUserLogin,
     getRegister,
     getUser,
-    getUserRegister,
-    auth,
-    test,
+    getUserRegister,    
     getSessionLogout,
     formForgotPassword,
     forgotPassword,
     formResetPassword,
-    resetPassword
+    resetPassword,
+    deleteUser
 }
