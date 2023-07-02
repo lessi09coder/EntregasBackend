@@ -30,7 +30,7 @@ before(async () => {
         email: "testemail@gmail.com",
         password: "123"
     };
-    const resUserTestCreate = await requester.post('/api/session/register').send(userMock).expect(200)
+    const resUserTestCreate = await requester.post('/api/users/register').send(userMock).expect(200)
     assert.isObject(resUserTestCreate.body.data, 'It is not an object');
     idUserTest = resUserTestCreate.body.data._id
     idCartTest = resUserTestCreate.body.data.idCart
@@ -49,6 +49,6 @@ describe('Testing Zapacool', () => {
     const res = await requester.delete(`/api/products/delete/${idProductTest}`).expect(200)
     expect(res.body.payload).to.equal(`el producto ${res.body.data.title} fue eliminado.`);
 
-    const resUserTest = await requester.delete(`/api/session/delete/${idUserTest}`).expect(200)
+    const resUserTest = await requester.delete(`/api/users/delete/${idUserTest}`).expect(200)
     expect(resUserTest._body.status).to.equal("success");
 })

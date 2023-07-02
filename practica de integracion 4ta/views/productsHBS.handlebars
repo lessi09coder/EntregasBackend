@@ -1,0 +1,34 @@
+{{#if user}}
+        <h3>Usuario conectado: {{user.user}}</h3>
+{{else}}
+{{/if}}
+
+{{#each productsView.docs }}
+    <h2>Producto:</h2>
+    
+       <h3>Nombre: {{title}}</h3>
+       <h4>Descripcion: {{description}}</h4>
+       <h4>Precio: $ {{price}}</h4>
+       <h4>Disponibilidad: {{stock}} pares.</h4>
+       <h4>Categoria: {{category}}</h4>
+       <h3>Ir al producto: <a href="/api/products/{{_id}}"><Button>IR</Button></a></h3>          
+
+{{/each}}
+
+<div>
+    {{#if productsView.hasPrevPage}}
+        <a href={{productsView.prevLink}}>Anterior</a>
+    {{/if}}
+    
+     {{#if productsView.hasNextPage}}
+        <a href={{productsView.nextLink}}>Siguiente</a>
+    {{/if}} 
+
+    &nbsp;
+    <p>pagina actual: {{productsView.page}}</p>
+    &nbsp;
+</div>
+ 
+<h2><button onclick="location.href = '/api/carts/{{user.idCart}}'">Ir a Carrito.</button></h2>
+
+
