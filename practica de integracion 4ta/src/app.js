@@ -2,7 +2,7 @@ const express = require('express');
 
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUiExpress = require('swagger-ui-express');
-const  swaggerOptions = require('./swagger-options.js')
+const swaggerOptions = require('./swagger-options.js')
 
 const { SECRETSESSION, MONGODB, PORT } = require('./config/config.js');
 const app = express();
@@ -34,7 +34,7 @@ app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 const mongoStore = MongoStore.create({
     mongoUrl: MONGODB,
     mongoOptions: { useUnifiedTopology: true },
-    ttl: 500
+    ttl: 5000
 });
 
 //const SECRETSESSION = process.env.SECRETSESSION
@@ -76,16 +76,7 @@ app.get('/', (req, res) => {
 });
 
 
-// ya se puede borrar el get de logger siguiente..
-/* app.get('/logger', (req, res) => {
-    req.logger.debug('Este es verbose')
-    req.logger.info('Ingreso en la ruta raiz')
-    req.logger.warning('Este es un warn')
-    res.send({ message: "Prueba de logger" })
-}); */
-
 //const PORT = process.env.PORT || 8080;
-
 const httpServer = app.listen(PORT, () => {
     console.log(`Server running on port: ${httpServer.address().port}`)
 });

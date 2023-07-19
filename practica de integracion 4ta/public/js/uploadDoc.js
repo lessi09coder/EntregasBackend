@@ -1,38 +1,33 @@
 const form = document.getElementById("uploadForm");
 const documentInput = document.getElementById("documentInput");
 
+form.onsubmit = (e) => {
+    e.preventDefault();
+    submitForm(form.dataset.user);
+};
+
+/* 
 document.getElementById("uploadForm").addEventListener("submit", (event) => {
     event.preventDefault();
     submitForm(form.dataset.userId);
-});
+}); 
+*/
 
 const submitForm = async (userId) => {
     const formData = new FormData();
     const files = documentInput.files;
-    for (let i = 0; i < files.length; i++) {
-        formData.append("document", files[i]);
-    }
 
-    try {
-        const response = await fetch(`/api/users/${userId}/documents`, {
-            method: "POST",
-            body: formData,
-        });
+    console.log(files)
 
-        const data = await response.json();
-        if (data.status === "error") {
-            alerts(data.status, data.payload);
-        }
-        if (data.status === "success") {
-            alerts(data.status, data.payload);
-        }
-    } catch (error) {
-        console.error("Error:", error);
-    }
-}
+    for (let i = 0; i < files.length; i++) {        
+        formData.append("files", files[i])      
+    }           
 
-
-/* form.onsubmit = (e) => {
-    e.preventDefault();
-    submitForm(form.dataset.userId);
-}; */
+    await fetch(`/api/users/${userId}/documents`, {
+        method: "POST",
+        body: formData,
+    })
+    .then(response => response.text())
+    .then(responseText => console.log(responseText))
+    .catch(error => console.error(error))
+};

@@ -3,6 +3,7 @@ const { getTokenByUserIdService, createTokenService, updateTokenService, deleteT
 const { yesValidPass, isValidToken, createHash } = require('../utils/hashPass.js');
 const { tokenRamdon } = require('../utils/TokenPassword.js')
 const sendMailToUser = require('../utils/sendEmailUser.js')
+
 const getUser = async (req, res) => {
     res.render("login", {})
 };

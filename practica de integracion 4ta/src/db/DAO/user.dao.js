@@ -32,32 +32,25 @@ class UserDAO {
 
     async getUserEmailPassport(email) {
         const user = await UserModel.findOne({ email: email }).lean();
-
         return user
     }
 
-    async createUser(user, cid) {
-        //console.log(cid)
+    async createUser(user, cid) {        
         const newUser = await UserModel.create({
             ...user,
             idCart: cid
-        });
-        //console.log(newUser)
+        })        
         return convertDataToObj(newUser);
     }
 
     async findUser(user) {
-        let existUser = await UserModel.findOne({ user: user });
-        //console.log(`este es el user de UserDao!!: ${existUser}`)
+        let existUser = await UserModel.findOne({ user: user });       
         if (!existUser) return { mesagge: "Usuario inexistente" };
         return convertDataToObj(existUser);
     }
 
     async getUserId(id) {
         const user = await UserModel.findOne({ _id: id }).lean();
-        //console.log(`este es el user de UserDao: ${user}`)
-        //return user
-
         return convertDataToObj(user)
     }
 
@@ -77,6 +70,38 @@ class UserDAO {
     async deleteUser(uid) {
         const deleteUser = await UserModel.deleteOne({ _id: uid })
         return convertDataToObj(deleteUser)
+    }
+
+    async updateDocument(uid, documentStatus) {
+        try {
+            const user = await UserModel.findOne({ _id: uid });
+            if (user) {
+                const duplicateDocuments = [];
+                const documentsToAdd = documentStatus.map((doc) => ({
+                    name: doc.name,
+                    reference: doc.reference,
+                }));
+
+                documentsToAdd.forEach(newDoc => {
+                    const alreadyExists = user.documents.some(
+                        existingDoc => existingDoc.name === newDoc.name
+                    );
+
+                    if (!alreadyExists) {
+                        user.documents.push(newDoc);
+                    }
+                    else {
+                        duplicateDocuments.push(newDoc.name);
+                    }
+                });
+                await user.save();
+                return { user: convertDataToObj(user), duplicateDocuments };
+            } else {
+                throw new Error('Usuario Inexistente');
+            }
+        } catch (error) {
+            return { error: error.message };
+        }
     }
 }
 module.exports = UserDAO;

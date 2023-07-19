@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const userRouter = Router();
 const passport = require('passport');
-const upload = require('../config/multer.js');
+const uploadFilesMulter = require('../config/multer.js');
 
 const {
      postUserLogin,
@@ -14,7 +14,7 @@ const {
      formResetPassword,
      resetPassword,
      deleteUser,
-     UploadForm,
+     uploadForm,
      uploadDocuments
 } = require("../controllers/usersControllers.js")
 
@@ -38,9 +38,13 @@ userRouter.get('/githubcallback', passport.authenticate("github", {
           res.redirect("/api/products");
      }
 );
-userRouter.get("/documents", upload.array('document'), UploadForm)
-userRouter.post("/:uid/documents", upload.array('document'), uploadDocuments)
-
+userRouter.get("/documents", uploadForm)
+userRouter.post("/:uid/documents",  uploadFilesMulter(), uploadDocuments)
+/* userRouter.post("/documents", uploadFilesMulter(), (req, res) => {
+     console.log("hola")
+     console.log(req.files)
+     res.send("ok")
+}) */
 userRouter.get('/register', getRegister);
 userRouter.post('/register', getUserRegister); //localhost:8080/api/users/register
 
@@ -50,7 +54,7 @@ userRouter.get("/forgotPassword", formForgotPassword)
 userRouter.post("/forgotPassword", forgotPassword)
 userRouter.get("/resetPassword", formResetPassword)
 userRouter.post("/resetPassword", resetPassword)
-userRouter.delete('/delete/:uid' , deleteUser)
+userRouter.delete('/delete/:uid', deleteUser)
 
 //sesionsRouter.get('/admin', auth, getPrivate)
 module.exports = userRouter;

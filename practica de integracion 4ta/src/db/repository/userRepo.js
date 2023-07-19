@@ -33,11 +33,17 @@ class UserRepository {
         return res;
     }
 
-    deleteUserRepo = async (uid) => {
-        console.log(uid)
+    deleteUserRepo = async (uid) => {        
         const res = await userDAO.deleteUser(uid);
         return res;
     }
+
+    updateDocumentsStatus= async (uid, documentStatus) =>{
+        const res = await userDAO.updateDocument(uid , documentStatus);
+        return res
+    }
 }
+
+
 
 module.exports = UserRepository

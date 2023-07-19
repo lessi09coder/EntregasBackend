@@ -1,5 +1,6 @@
-const { createUserService, loginUserService, getUserEmailService, getUserIdService, updatePasswordService, deleteUserService } = require('../services/userServices.js');
+const { createUserService, loginUserService, getUserEmailService, getUserIdService, updatePasswordService, deleteUserService, updateDocumentsService, generateDocumentURL } = require('../services/userServices.js');
 const { getTokenByUserIdService, createTokenService, updateTokenService, deleteTokenByIdService } = require('../services/tokenService.js')
+const path = require('path')
 const { yesValidPass, isValidToken, createHash } = require('../utils/hashPass.js');
 const { tokenRamdon } = require('../utils/TokenPassword.js')
 const sendMailToUser = require('../utils/sendEmailUser.js')
@@ -17,10 +18,11 @@ const postUserLogin = async (req, res) => {
         const validatePass = yesValidPass(loginUser, req.body.password);
 
         if (validatePass) {
-            req.session.user = loginUser.user;
-            req.session.email = loginUser.email
+            req.session.user = loginUser;
+
+            /* req.session.email = loginUser.email
             req.session.rol = loginUser.rol;
-            req.session.idCart = loginUser.idCart
+            req.session.idCart = loginUser.idCart */
             res.send({ status: "success", data: req.session, payload: `el usuario ${req.session.user} esta loggeado.` });
         } else {
             res.send({ status: "error", payload: "no se pudo loggear el usuario." })
@@ -51,8 +53,8 @@ const getUserRegister = async (req, res) => {
     const newUserData = req.body;
     //newUser = {user: "hola", password:11}
     const newUser = await createUserService(newUserData);
-    //res.render('register',{})
-    res.send({ status: "success", data: newUser, payload: `el usuario ${req.session.user} esta loggeado.` })
+
+    res.send({ status: "success", data: newUser, payload: `el usuario ${req.session.user.user} esta loggeado.` })
 };
 
 const getSessionLogout = async (req, res) => {
@@ -148,33 +150,34 @@ const deleteUser = async (req, res, next) => {
 }
 
 
-const UploadForm = (req, res) => {
+const uploadForm = (req, res) => {
     const user = req.session.user;
     res.render('uploadDocs', { title: "Subir Docs", user });
 };
 
 const uploadDocuments = async (req, res, next) => {
-    try {
+    /*  console.log("hola controller users uploadDoc")
+   console.log(req.params.uid) 
+   console.log(req.body) 
+    */
+    try {        
         const uid = req.params.uid;
-        const user = await getUserIdService(uid);
+        const user = await getUserIdService(uid);        
         const files = req.files;
         if (files && files.length > 0) {
             const documentStatus = files.map(file => ({
                 name: path.parse(file.originalname).name,
-                reference: generateDocumentURL(file, user.username),
+                reference: generateDocumentURL(file, user.user),
             }));
-            const updatedUser = await updateDocumentsStatusService(uid, documentStatus);
+            const updatedUser = await updateDocumentsService(uid, documentStatus);
             res.send({ status: "success", payload: `Documentos cargados correctamente`, data: updatedUser });
         } else {
             res.status(400).send({ status: "error", payload: "No se proporcionaron archivos" });
         }
     } catch (error) {
-        next(error)
+        console.log(error)
     }
 }
-
-
-
 
 module.exports = {
     postUserLogin,
@@ -187,6 +190,6 @@ module.exports = {
     formResetPassword,
     resetPassword,
     deleteUser,
-    UploadForm,
+    uploadForm,
     uploadDocuments
 }
